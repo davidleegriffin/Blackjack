@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 function Player() {
     const deckId = localStorage.getItem("deck");
+    let playerNumCards = 2;
     
     const [playerCards, setPlayerCards] = useState([]);
 
@@ -26,12 +27,18 @@ function Player() {
         dealPlayerCards();
     }, [deckId]);
 
-
     console.log('playerCards', playerCards);
+
+    function hitPlayer() {
+        playerNumCards++;
+        console.log('hitPlayer', playerNumCards);
+    }
 
     return (
         <div>
             <h1>PLAYER</h1>
+            {/* {playerNumCards} */}
+            <button onClick={hitPlayer}>HIT ME!</button>
             <div className="player__card--image">
                 {playerCards.map((card) => {
                     return (
