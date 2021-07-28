@@ -2,15 +2,15 @@ import React from 'react';
 
 function Dealer() {
     const deckId = localStorage.getItem("deck");
-    const dealerCards = [];
+    const dealerCards = ['test'];
     
-    function addCard() {
+    function addDealerCard() {
         fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
                 .then(response => response.json())
                 .then(data => dealerCards.push(data.cards[0]));       
     }
-    addCard();
-    addCard();
+    addDealerCard();
+    addDealerCard();
    console.log('dealerCards', dealerCards);
 
     return (
