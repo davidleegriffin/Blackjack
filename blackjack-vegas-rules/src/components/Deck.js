@@ -1,11 +1,16 @@
 import React from 'react';
 
 function Deck() {
-    console.log('deck');
+
+    function newDeck() {
+        fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+            .then(response => response.json())
+            .then(data => localStorage.setItem("deck", data.deck_id));       
+    };
 
     return (
         <div>
-            <h1>DECK</h1>
+            <button onClick={() => {newDeck()}}>Shuffle Deck</button>
         </div>
     )
 }
