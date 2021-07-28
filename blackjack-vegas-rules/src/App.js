@@ -8,8 +8,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         BLACKJACK
-      </header>
       <Deck />
+      </header>
       <Dealer />
       <Player />
     </div>
