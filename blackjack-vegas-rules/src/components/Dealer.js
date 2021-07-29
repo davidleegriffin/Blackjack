@@ -9,9 +9,10 @@ function Dealer() {
             let dealer_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
+            console.log('data', data);
             dealer_cards.push(data.cards[0]);
             // dealer_cards.push(data.cards[1]);
-            setDealerCards((dealerCards) => [...dealerCards, dealer_cards])
+            setDealerCards(dealer_cards)
         };
         dealDealerCards();
     }, [deckId]);
