@@ -53,8 +53,8 @@ function Dealer() {
 
     return (
         <div>
-            <h3>{ cardsRemaining }</h3>
-            <h1>DEALER</h1>
+            <h3><h1>{ cardsRemaining }</h1> Cards Remaining in Deck</h3>
+            <h1>Dealer Score: { dealerScore }</h1>
             <div className="player__card--image">
                 {dealerCards.map((card, idx) => {
                     return (

@@ -8,10 +8,37 @@ function Player() {
     const [playerScore, setPlayerScore] = useState(0);
 
     function checkScore() {
+        // console.log('playernumcards', playerNumCards);
+        if (playerNumCards >= 5) {
+            setPlayerNumCards(0);
+            return (
+                <div className="player__card--image">
+                    {playerCards.map((card, index) => {
+                        return (
+                            <div key={index}>
+                                <img src={card[0]?.image} />
+                            </div>
+                            );})}
+                </div>
+              
+            )
+            // window.alert("WINNER!");
+            // window.location.reload();
+        }
         if (playerScore > 21) {
-            window.alert("BUSTED!!");
             setPlayerScore(0);
-            window.location.reload();
+            return (
+                <div className="player__card--image">
+                {playerCards.map((card, index) => {
+                    return (
+                        <div key={index}>
+                            <img src={card[0]?.image} />
+                        </div>
+                        );})}
+            </div>
+            )
+            // window.alert("BUSTED!!");
+            // window.location.reload();
         };
     };
     checkScore();
@@ -40,18 +67,19 @@ function Player() {
                 setPlayerScore(playerScore + 10);
             } else if (ele[0]?.value === "ACE") {
                 if ((playerScore + 11) <= 21) {
-                    console.log('is alright');
+                    // console.log('is alright');
+                    setPlayerScore(playerScore + 11);
                 } else {
-                    console.log('nope');
-                    // setPlayerScore(playerScore + 1);
+                    // console.log('nope');
+                    setPlayerScore(playerScore + 1);
                 }
             }
-            checkScore();
+            // checkScore();
         });
     }, [playerCards]);
 
-    console.log('playerCards', playerCards);
-    console.log('playerScore', playerScore);
+    // console.log('playerCards', playerCards);
+    // console.log('playerScore', playerScore);
 
     async function hitPlayer() {
         // playerNumCards += 1;
@@ -62,8 +90,8 @@ function Player() {
         player_cards.push(data.cards[0]);
         // player_cards.push(data.cards[1]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
-        console.log('playnumcards', playerNumCards);
-        checkScore();
+        // console.log('playnumcards', playerNumCards);
+        // checkScore();
     }
 
     // console.log('hitPlayer', playerNumCards);
@@ -73,6 +101,7 @@ function Player() {
             <h1>Player Score: {playerScore}</h1>
             {/* {playerNumCards} */}
             <button onClick={hitPlayer}>HIT ME!</button>
+            <button>STAND</button>
             <div className="player__card--image">
                 {playerCards.map((card, index) => {
                     return (
