@@ -7,6 +7,15 @@ function Player() {
     const [playerNumCards, setPlayerNumCards] = useState(2);
     const [playerScore, setPlayerScore] = useState(0);
 
+    function checkScore() {
+        if (playerScore > 21) {
+            window.alert("BUSTED!!");
+            setPlayerScore(0);
+            window.location.reload();
+        };
+    };
+    checkScore();
+
     useEffect(() => {
         const dealPlayerCards = async () => {
             let player_cards = [];
@@ -29,8 +38,15 @@ function Player() {
             } else if (royals.includes(ele[0]?.value)) {
                 // console.log('royals');
                 setPlayerScore(playerScore + 10);
+            } else if (ele[0]?.value === "ACE") {
+                if ((playerScore + 11) <= 21) {
+                    console.log('is alright');
+                } else {
+                    console.log('nope');
+                    // setPlayerScore(playerScore + 1);
+                }
             }
-            checkScore(playerScore);
+            checkScore();
         });
     }, [playerCards]);
 
@@ -46,19 +62,15 @@ function Player() {
         player_cards.push(data.cards[0]);
         // player_cards.push(data.cards[1]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
+        console.log('playnumcards', playerNumCards);
+        checkScore();
     }
-    // console.log('hitPlayer', playerNumCards);
 
-    function checkScore(playerScore) {
-        if (playerScore > 21) {
-            window.alert("BUSTED!!");
-            window.location.reload();
-        };
-    };
+    // console.log('hitPlayer', playerNumCards);
 
     return (
         <div>
-            <h1>PLAYER</h1>
+            <h1>Player Score: {playerScore}</h1>
             {/* {playerNumCards} */}
             <button onClick={hitPlayer}>HIT ME!</button>
             <div className="player__card--image">
