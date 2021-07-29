@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 
 function Player() {
     const deckId = localStorage.getItem("deck");
-    let playerNumCards = 2;
+    // let playerNumCards = 2;
 
     const [playerCards, setPlayerCards] = useState([]);
+    const [playerNumCards, setPlayerNumCards] = useState(2);
 
     // function addPlayerCard() {
     //     fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
@@ -30,8 +31,8 @@ function Player() {
     console.log('playerCards', playerCards);
 
     async function hitPlayer() {
-        playerNumCards++;
-        console.log('hitPlayer', playerNumCards);
+        // playerNumCards += 1;
+        setPlayerNumCards(playerNumCards + 1);
         let player_cards = [];
         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
         const data = await response.json();
@@ -39,6 +40,7 @@ function Player() {
         // player_cards.push(data.cards[1]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
     }
+    console.log('hitPlayer', playerNumCards);
 
     return (
         <div>
@@ -49,7 +51,7 @@ function Player() {
                 {playerCards.map((card) => {
                     return (
                         <div>
-                            <img src={card[0].image} />
+                            <img src={card} />
                         </div>
                         );})}
             </div>

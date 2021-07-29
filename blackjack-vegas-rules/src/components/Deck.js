@@ -7,7 +7,7 @@ function Deck() {
         .then(response => response.json())
         .then(data => localStorage.setItem("deck", data.deck_id))
         // .catch((err) => console.error(err));
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (

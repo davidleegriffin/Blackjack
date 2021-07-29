@@ -27,7 +27,7 @@ function Dealer() {
                 {dealerCards.map((card) => {
                     return (
                         <div>
-                            <img src={card[0].image} />
+                            <img src={card} />
                         </div>
                         );})}
             </div>
