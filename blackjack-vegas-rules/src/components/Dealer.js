@@ -1,33 +1,65 @@
+import { removeTypeDuplicates } from '@babel/types';
 import React, { useState, useEffect } from 'react';
 
 function Dealer() {
     const deckId = localStorage.getItem("deck");
+    const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
+    const [dealerScore, setDealerScore] = useState(0);
+    const [cardsRemaining, setCardsRemaining] = useState();
+
+    function shuffleDeck() {
+        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
+        .then(response => response.json())
+        .then(data => setCardsRemaining(data.remaining))
+        .catch((err) => console.error(err));
+
+    };
 
     useEffect(() => {
         const dealDealerCards = async () => {
             let dealer_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            console.log('data', data);
-            dealer_cards.push(data.cards);
+            console.log('data', data.remaining);
+            setCardsRemaining(data.remaining)
+            if (data.remaining < 10) {
+                // console.log('data is zero');
+                shuffleDeck();
+            }
+            dealer_cards.push(data.cards[0]);
             // dealer_cards.push(data.cards[1]);
-            setDealerCards(dealer_cards)
+            setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
         };
         dealDealerCards();
-    }, [deckId]);
-
+        // dealDealerCards();
+    }, []);
 
     console.log('dealerCards', dealerCards);
+    
+    useEffect(() => {
+        dealerCards.forEach(ele => {
+            if (parseInt(ele[0]?.value)) {
+                // console.log('number', dealerScore)
+                setDealerScore(dealerScore + parseInt(ele[0]?.value));
+            } else if (royals.includes(ele[0]?.value)) {
+                // console.log('royals');
+                setDealerScore(dealerScore + 10);
+            }
+        });
+    }, [dealerCards]);
+
+    console.log('dealerScore', dealerScore);
 
     return (
         <div>
+            <h3>{ cardsRemaining }</h3>
             <h1>DEALER</h1>
             <div className="player__card--image">
-                {dealerCards.map((card) => {
+                {dealerCards.map((card, idx) => {
                     return (
                         <div>
-                            <img src={card} />
+                            <img key={idx} src={card[0]?.image} />
                         </div>
                         );})}
             </div>
