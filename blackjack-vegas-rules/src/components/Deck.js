@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import addDealerCard from './Dealer';
+import Dealer from './Dealer';
 
 function Deck() {
     const [standButton, setStandButton] = useState("");
 
     function standPlayer() {
-        console.log('standPlayer');
+        setStandButton("true");
+        localStorage.setItem("standButton", "true");
     }
 
     function newDeck() {
@@ -17,6 +18,7 @@ function Deck() {
     };
 
     function newHand() {
+        localStorage.setItem("standButton", "");
         window.location.reload();
     }
 
