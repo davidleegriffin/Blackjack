@@ -1,5 +1,6 @@
 import { removeTypeDuplicates } from '@babel/types';
 import React, { useState, useEffect } from 'react';
+import '../App.css';
 
 function Dealer() {
     const deckId = localStorage.getItem("deck");
@@ -35,6 +36,10 @@ function Dealer() {
         // dealDealerCards();
     }, []);
 
+    function addDealerCard() {
+        console.log('addDealerCard');
+    }
+
     console.log('dealerCards', dealerCards);
     
     useEffect(() => {
@@ -52,16 +57,23 @@ function Dealer() {
     console.log('dealerScore', dealerScore);
 
     return (
-        <div>
-            <h3><h1>{ cardsRemaining }</h1> Cards Remaining in Deck</h3>
-            <h1>Dealer Score: { dealerScore }</h1>
-            <div className="player__card--image">
-                {dealerCards.map((card, idx) => {
-                    return (
-                        <div>
-                            <img key={idx} src={card[0]?.image} />
-                        </div>
-                        );})}
+        <div className="dealer__container--main">
+            <div className="dealer__container--remaining">
+                <h3>
+                    <h1>{ cardsRemaining }</h1> 
+                    Cards Remaining in Deck
+                </h3>
+            </div>
+            <div>
+                <h1>Dealer Score: { dealerScore }</h1>
+                <div className="player__card--image">
+                    {dealerCards.map((card, idx) => {
+                        return (
+                            <div>
+                                <img key={idx} src={card[0]?.image} width="100" />
+                            </div>
+                            );})}
+                </div>
             </div>
         </div>
     )

@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
+
 function Player() {
     const deckId = localStorage.getItem("deck");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [playerCards, setPlayerCards] = useState([]);
     const [playerNumCards, setPlayerNumCards] = useState(2);
     const [playerScore, setPlayerScore] = useState(0);
+    const [hitButton, setHitButton] = useState("");
 
     function checkScore() {
         // console.log('playernumcards', playerNumCards);
@@ -20,13 +22,11 @@ function Player() {
                             </div>
                             );})}
                 </div>
-              
             )
-            // window.alert("WINNER!");
-            // window.location.reload();
         }
         if (playerScore > 21) {
-            setPlayerScore(0);
+            setHitButton("true");
+            setTimeout(function() { window.location.reload(); }, 1500);            setPlayerScore(0);
             return (
                 <div className="player__card--image">
                 {playerCards.map((card, index) => {
@@ -34,11 +34,9 @@ function Player() {
                         <div key={index}>
                             <img src={card[0]?.image} />
                         </div>
-                        );})}
-            </div>
+                    );})}
+                </div>
             )
-            // window.alert("BUSTED!!");
-            // window.location.reload();
         };
     };
     checkScore();
@@ -82,34 +80,29 @@ function Player() {
     // console.log('playerScore', playerScore);
 
     async function hitPlayer() {
-        // playerNumCards += 1;
         setPlayerNumCards(playerNumCards + 1);
         let player_cards = [];
         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
         const data = await response.json();
         player_cards.push(data.cards[0]);
-        // player_cards.push(data.cards[1]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
-        // console.log('playnumcards', playerNumCards);
-        // checkScore();
     }
 
     // console.log('hitPlayer', playerNumCards);
 
     return (
         <div>
-            <h1>Player Score: {playerScore}</h1>
-            {/* {playerNumCards} */}
-            <button onClick={hitPlayer}>HIT ME!</button>
-            <button>STAND</button>
             <div className="player__card--image">
                 {playerCards.map((card, index) => {
                     return (
-                        <div key={index}>
-                            <img src={card[0]?.image} />
+                        <div key={index} className="player__card--image">
+                            <img src={card[0]?.image} width="100" />
                         </div>
                         );})}
             </div>
+            <h1>Player Score: {playerScore}</h1>
+            {/* {playerNumCards} */}
+            <button disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
         </div>
     )
 }

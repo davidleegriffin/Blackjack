@@ -26,9 +26,29 @@
   color: white;
 }
 
+.App__players--container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .player__card--image {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
+  margin-top: 20%;
+}
+
+.dealer__container--main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  padding-top: 25px;
+}
+
+.dealer__container--remaining {
+  margin-right: 120px;
+  margin-top: 75px;
 }
