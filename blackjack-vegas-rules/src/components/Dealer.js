@@ -36,28 +36,28 @@ function Dealer(props) {
         // dealDealerCards();
     }, []);
 
-    //if (props.props === "true") {
-    // useEffect(() => {
-    //     const addDealerCards = async () => {
-    //         let dealer_cards = [];
-    //         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
-    //         const data = await response.json();
-    //         // console.log('data', data.remaining);
-    //         setCardsRemaining(data.remaining)
-    //         if (data.remaining < 10) {
-    //             // console.log('data is zero');
-    //             shuffleDeck();
-    //         }
-    //         dealer_cards.push(data.cards[0]);
-    //         // dealer_cards.push(data.cards[1]);
-    //         setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
-    //     };
-    //     addDealerCards();
-    //     // dealDealerCards();
-    // }, []);
-    //};
+    useEffect(() => {
+        if (props.props === "true") {
+            const addDealerCards = async () => {
+                let dealer_cards = [];
+                const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
+                const data = await response.json();
+                // console.log('data', data.remaining);
+                setCardsRemaining(data.remaining)
+                if (data.remaining < 10) {
+                    // console.log('data is zero');
+                    shuffleDeck();
+                }
+                dealer_cards.push(data.cards[0]);
+                // dealer_cards.push(data.cards[1]);
+                setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
+            };
+            addDealerCards();
+        }
+        // dealDealerCards();
+    }, [props]);
     
-   if (standButton === "true" && dealerScore < 17) {
+   if (props.props === "true" && dealerScore < 17) {
     //    addDealerCards();
     console.log('logic check');
    }

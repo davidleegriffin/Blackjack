@@ -11,7 +11,7 @@ function Deck() {
         .then(data => localStorage.setItem("deck", data.deck_id))
         .catch((err) => console.error(err));
         // setTimeout(function() { window.location.reload(); }, 1500);
-        newHand();
+        // newHand();
     };
 
     function newHand() {
