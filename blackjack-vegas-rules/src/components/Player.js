@@ -5,6 +5,7 @@ function Player() {
     let playerNumCards = 2;
 
     const [playerCards, setPlayerCards] = useState([]);
+    const [playerScore, setPlayerScore] = useState();
 
     // function addPlayerCard() {
     //     fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
@@ -30,14 +31,14 @@ function Player() {
     console.log('playerCards', playerCards);
 
     async function hitPlayer() {
-        playerNumCards++;
-        console.log('hitPlayer', playerNumCards);
         let player_cards = [];
         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
         const data = await response.json();
         player_cards.push(data.cards[0]);
         // player_cards.push(data.cards[1]);
-        setPlayerCards((playerCards) => [...playerCards, player_cards])
+        setPlayerCards((playerCards) => [...playerCards, player_cards]);
+        playerCards.forEach(ele => console.log('ele', ele[0].value));
+
     }
 
     return (
