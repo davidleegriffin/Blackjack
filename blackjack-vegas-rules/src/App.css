@@ -39,6 +39,13 @@
   margin-top: 20%;
 }
 
+.App__button--stand {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  height: 100%;
+}
+
 .dealer__container--main {
   display: flex;
   flex-direction: row;

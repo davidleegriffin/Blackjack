@@ -36,30 +36,33 @@ function Dealer(props) {
         // dealDealerCards();
     }, []);
 
-    useEffect(() => {
-        const addDealerCards = async () => {
-            let dealer_cards = [];
-            const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
-            const data = await response.json();
-            console.log('data', data.remaining);
-            setCardsRemaining(data.remaining)
-            if (data.remaining < 10) {
-                // console.log('data is zero');
-                shuffleDeck();
-            }
-            dealer_cards.push(data.cards[0]);
-            // dealer_cards.push(data.cards[1]);
-            setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
-        };
-        addDealerCards();
-        // dealDealerCards();
-    }, [standButton]);
+    //if (props.props === "true") {
+    // useEffect(() => {
+    //     const addDealerCards = async () => {
+    //         let dealer_cards = [];
+    //         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
+    //         const data = await response.json();
+    //         // console.log('data', data.remaining);
+    //         setCardsRemaining(data.remaining)
+    //         if (data.remaining < 10) {
+    //             // console.log('data is zero');
+    //             shuffleDeck();
+    //         }
+    //         dealer_cards.push(data.cards[0]);
+    //         // dealer_cards.push(data.cards[1]);
+    //         setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
+    //     };
+    //     addDealerCards();
+    //     // dealDealerCards();
+    // }, []);
+    //};
     
-    function addDealerCard() {
-        console.log('addDealerCard');
-    }
+   if (standButton === "true" && dealerScore < 17) {
+    //    addDealerCards();
+    console.log('logic check');
+   }
     
-    console.log('dealerCards', dealerCards);
+    // console.log('dealerCards', dealerCards);
     
     useEffect(() => {
         dealerCards.forEach(ele => {
@@ -73,7 +76,7 @@ function Dealer(props) {
         });
     }, [dealerCards]);
     
-    console.log('dealerScore', dealerScore);
+    // console.log('dealerScore', dealerScore);
     console.log('props', props);
     
     return (
@@ -85,7 +88,7 @@ function Dealer(props) {
                 </h3>
             </div>
             <div>
-                {standButton==="true" && <h1>Dealer Score: { dealerScore }</h1>}
+                <h1>Dealer Score: { dealerScore }</h1>
                 <div className="player__card--image">
                     {dealerCards.map((card, idx) => {
                         return (

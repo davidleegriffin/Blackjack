@@ -5,9 +5,17 @@ import Player from './components/Player';
 import './App.css';
 
 function App() {
-  let standButton = localStorage.getItem("standButton");
-  // const [standButton, setStandButton] = useState();
+  // let standButton = localStorage.getItem("standButton");
+  const [standButton, setStandButton] = useState("");
   // setStandButton(stand_button);
+
+  function standPlayer() {
+        setStandButton("true");
+        // localStorage.setItem("standButton", "true");
+        // <Dealer props={standButton} />
+    }
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,8 +24,9 @@ function App() {
       <Deck>
       </Deck>
         <div className="App__players--container">
-          <Dealer props={standButton}/>
-          <Player />
+          <Player props={standButton}/>
+          <button className="App__button--stand" disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
+          <Dealer props={standButton} />
         </div>
     </div>
   );
