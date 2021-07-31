@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as gameActions from '../store/gameActions';
 import '../App.css';
 
-function Dealer(props) {
+function Dealer() {
     const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
     const standButton = localStorage.getItem("standButton");
@@ -11,18 +11,22 @@ function Dealer(props) {
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
-    let turn = useSelector(state => state.turn);
+
+
+    let gameTurn = useSelector(state => state.gameTurn);
+    console.log('gameTurn', gameTurn);
     // let testState = useSelector();
-    console.log('testState', turn);
-    
+    // useEffect(() => {
+    // }, [gameActions.gameTurn]);
+
     function shuffleDeck() {
         fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
         .then(response => response.json())
         .then(data => setCardsRemaining(data.remaining))
         .catch((err) => console.error(err));
-        
+
     };
-    
+
     useEffect(() => {
         const dealDealerCards = async () => {
             let dealer_cards = [];
@@ -43,7 +47,7 @@ function Dealer(props) {
     }, []);
 
     useEffect(() => {
-        if (props.props === "true") {
+        if (gameTurn === true) {
             const addDealerCards = async () => {
                 let dealer_cards = [];
                 const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
@@ -61,15 +65,15 @@ function Dealer(props) {
             addDealerCards();
         }
         // dealDealerCards();
-    }, [props]);
-    
-   if (props.props === "true" && dealerScore < 17) {
-    //    addDealerCards();
-    console.log('logic check');
-   }
-    
+    }, [gameTurn]);
+
+//    if (props.props === "true" && dealerScore < 17) {
+//     //    addDealerCards();
+//     console.log('logic check');
+//    }
+
     // console.log('dealerCards', dealerCards);
-    
+
     useEffect(() => {
         dealerCards.forEach(ele => {
             if (parseInt(ele[0]?.value)) {
@@ -81,15 +85,19 @@ function Dealer(props) {
             }
         });
     }, [dealerCards]);
-    
+
+    useEffect(() => {
+            dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
+    }, [gameTurn]);
+
     // console.log('dealerScore', dealerScore);
     // console.log('props', props);
-    
+
     return (
         <div className="dealer__container--main">
             <div className="dealer__container--remaining">
                 <h3>
-                    <h1>{ cardsRemaining }</h1> 
+                    <h1>{ cardsRemaining }</h1>
                     Cards Remaining in Deck
                 </h3>
             </div>

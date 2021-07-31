@@ -17,8 +17,8 @@ const gameReducer = (state = {}, action) => {
         case DEALER_SCORE:
             newState = Object.assign({}, action.dealer_score);
             return newState;
-        case GAME_TURN: 
-            newState = {'turn': action.game_turn};
+        case GAME_TURN:
+            newState = {'gameTurn': action.game_turn};
             return newState;
         default:
             return state;
