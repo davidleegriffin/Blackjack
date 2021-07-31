@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 
-function Player() {
+function Player(props) {
     const deckId = localStorage.getItem("deck");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [playerCards, setPlayerCards] = useState([]);
@@ -26,7 +26,8 @@ function Player() {
         }
         if (playerScore > 21) {
             setHitButton("true");
-            setTimeout(function() { window.location.reload(); }, 1500);            setPlayerScore(0);
+            setTimeout(function() { window.location.reload(); }, 1500);
+            setPlayerScore(0);
             return (
                 <div className="player__card--image">
                 {playerCards.map((card, index) => {
@@ -78,6 +79,11 @@ function Player() {
 
     // console.log('playerCards', playerCards);
     // console.log('playerScore', playerScore);
+    // console.log('playerProps', props.props);
+
+    if (props.props === "true") {
+        console.log('player true');
+    }
 
     async function hitPlayer() {
         setPlayerNumCards(playerNumCards + 1);
