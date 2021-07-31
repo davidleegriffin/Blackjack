@@ -13,37 +13,33 @@ function Dealer() {
     const [cardsRemaining, setCardsRemaining] = useState();
 
     let gameTurn = useSelector(state => state.gameTurn);
-    console.log('gameTurn', gameTurn);
-    // let testState = useSelector();
-    // useEffect(() => {
-    // }, [gameActions.gameTurn]);
+    // console.log('gameTurn', gameTurn);
 
+    //SHUFFLE THE CURRENT DECK---------------------------------------------------------
     function shuffleDeck() {
-        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
+        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=2')
         .then(response => response.json())
         .then(data => setCardsRemaining(data.remaining))
         .catch((err) => console.error(err));
     };
 
+    //DEAL INITIAL DEALER CARD--------------------------------------------------------------------------
     useEffect(() => {
         const dealDealerCards = async () => {
             let dealer_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            // console.log('data', data.remaining);
-            setCardsRemaining(data.remaining)
-            if (data.remaining < 10) {
-                // console.log('data is zero');
+            setCardsRemaining(data.remaining);
+            if (cardsRemaining < 10) {
                 shuffleDeck();
             }
             dealer_cards.push(data.cards[0]);
-            // dealer_cards.push(data.cards[1]);
             setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
         };
         dealDealerCards();
-        // dealDealerCards();
     }, []);
 
+    //ADD DEALER CARD(S)--------------------------------------------------------------------------------------
     useEffect(() => {
         if (gameTurn === true) {
             const addDealerCards = async () => {
@@ -64,7 +60,7 @@ function Dealer() {
         }
     }, [gameTurn]);
 
-
+    //TALLY DEALER SCORE------------------------------------------------
     useEffect(() => {
         dealerCards.forEach(ele => {
             if (parseInt(ele[0]?.value)) {
@@ -73,10 +69,17 @@ function Dealer() {
             } else if (royals.includes(ele[0]?.value)) {
                 // console.log('royals');
                 setDealerScore(dealerScore + 10);
-            }
+            } else if (ele[0]?.value === "ACE") {
+                setDealerScore(dealerScore + 1);
+                if ((dealerScore + 10) <= 21) {
+                    // console.log('is alright');
+                    setDealerScore(dealerScore + 10);
+                }
+            };
         });
     }, [dealerCards]);
 
+    //DISPATCH DEALER SCORE--------------------------------------------------
     useEffect(() => {
             console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))

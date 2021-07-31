@@ -6,6 +6,7 @@ function Deck() {
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
 
+    //GET A NEW DECK FROM DECKOFCARDS.API-------------------------------------
     function newDeck() {
         fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2')
         .then(response => response.json())
@@ -15,11 +16,12 @@ function Deck() {
         // newHand();
     };
 
+    //GENERATE NEW HAND/RELOAD-----------------------
     function newHand() {
-        // localStorage.setItem("standButton", "");
         window.location.reload();
     };
 
+    //PLAYER STAND PAT-----------------------------
     const standPlayer = async () => {
         await setStandButton("true");
         await dispatch(gameActions.gameTurn(true))

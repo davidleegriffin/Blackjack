@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-
 function Player(props) {
     const deckId = localStorage.getItem("deck");
     const royals = ["KING", "QUEEN", "JACK", "10"];
@@ -9,6 +8,7 @@ function Player(props) {
     const [playerScore, setPlayerScore] = useState(0);
     const [hitButton, setHitButton] = useState("");
 
+    //CHECK SCORE AND DETERMINE OUTCOME--------------------
     function checkScore() {
         // console.log('playernumcards', playerNumCards);
         if (playerNumCards >= 5) {
@@ -42,6 +42,7 @@ function Player(props) {
     };
     checkScore();
 
+    //DEAL INITIAL PLAYER CARDS--------------------
     useEffect(() => {
         const dealPlayerCards = async () => {
             let player_cards = [];
@@ -55,6 +56,7 @@ function Player(props) {
         dealPlayerCards();
     }, []);
 
+    //TALLY PLAYER SCORE-------------------------
     useEffect(() => {
         playerCards.forEach(ele => {
             // console.log('ele', parseInt(ele[0].value))
@@ -65,22 +67,17 @@ function Player(props) {
                 // console.log('royals');
                 setPlayerScore(playerScore + 10);
             } else if (ele[0]?.value === "ACE") {
-                if ((playerScore + 11) <= 21) {
+                setPlayerScore(playerScore + 1);
+                if ((playerScore + 10) <= 21) {
                     // console.log('is alright');
-                    setPlayerScore(playerScore + 11);
-                } else {
-                    // console.log('nope');
-                    setPlayerScore(playerScore + 1);
+                    setPlayerScore(playerScore + 10);
                 }
             }
             // checkScore();
         });
     }, [playerCards]);
 
-    if (props.props === "true") {
-        console.log('player true');
-    }
-
+    //ADD PLAYER CARD(S)---------------------------
     async function hitPlayer() {
         setPlayerNumCards(playerNumCards + 1);
         let player_cards = [];
@@ -101,7 +98,6 @@ function Player(props) {
                         );})}
             </div>
             <h1>Player Score: {playerScore}</h1>
-            {/* {playerNumCards} */}
             <button disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
         </div>
     )

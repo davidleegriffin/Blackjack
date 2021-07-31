@@ -3,6 +3,7 @@ import {
     PLAYER_SCORE,
     DEALER_SCORE,
     GAME_TURN,
+    CARDS_REMAINING,
 } from './gameActions';
 
 const gameReducer = (state = {}, action) => {
@@ -19,6 +20,9 @@ const gameReducer = (state = {}, action) => {
             return newState;
         case GAME_TURN:
             newState = {'gameTurn': action.game_turn};
+            return newState;
+        case CARDS_REMAINING:
+            newState = {'cardsRemaining': action.cards_remaining};
             return newState;
         default:
             return state;

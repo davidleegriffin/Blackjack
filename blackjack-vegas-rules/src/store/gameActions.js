@@ -2,6 +2,7 @@ export const DECK_ID = 'DECK_ID';
 export const PLAYER_SCORE = 'PLAYER_SCORE';
 export const DEALER_SCORE = 'DEALER_SCORE';
 export const GAME_TURN = 'GAME_TURN';
+export const CARDS_REMAINING = 'CARDS_REMAINING';
 
 export const deckId = (deck_id) => {
     return {
@@ -28,5 +29,12 @@ export const gameTurn = (game_turn) => {
     return {
         type: GAME_TURN,
         game_turn,
+    };
+};
+
+export const cardsRemaining = (cards_remaining) => {
+    return {
+        type: CARDS_REMAINING,
+        cards_remaining,
     };
 };
