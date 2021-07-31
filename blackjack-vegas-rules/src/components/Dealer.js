@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as gameActions from '../store/gameActions';
 import '../App.css';
 
 function Dealer(props) {
+    const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
     const standButton = localStorage.getItem("standButton");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
+    let turn = useSelector(state => state.turn);
+    // let testState = useSelector();
+    console.log('testState', turn);
     
     function shuffleDeck() {
         fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
@@ -77,7 +83,7 @@ function Dealer(props) {
     }, [dealerCards]);
     
     // console.log('dealerScore', dealerScore);
-    console.log('props', props);
+    // console.log('props', props);
     
     return (
         <div className="dealer__container--main">
