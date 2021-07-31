@@ -9,7 +9,7 @@ function Deck() {
 
 
     function newDeck() {
-        fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
+        fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2')
         .then(response => response.json())
         .then(data => localStorage.setItem("deck", data.deck_id))
         .catch((err) => console.error(err));

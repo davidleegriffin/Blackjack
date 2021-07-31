@@ -67,12 +67,6 @@ function Dealer() {
         // dealDealerCards();
     }, [gameTurn]);
 
-//    if (props.props === "true" && dealerScore < 17) {
-//     //    addDealerCards();
-//     console.log('logic check');
-//    }
-
-    // console.log('dealerCards', dealerCards);
 
     useEffect(() => {
         dealerCards.forEach(ele => {
@@ -87,8 +81,9 @@ function Dealer() {
     }, [dealerCards]);
 
     useEffect(() => {
+            console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
-    }, [gameTurn]);
+    }, [dealerScore]);
 
     // console.log('dealerScore', dealerScore);
     // console.log('props', props);
