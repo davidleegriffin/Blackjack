@@ -12,7 +12,6 @@ function Dealer() {
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
 
-
     let gameTurn = useSelector(state => state.gameTurn);
     console.log('gameTurn', gameTurn);
     // let testState = useSelector();
@@ -24,7 +23,6 @@ function Dealer() {
         .then(response => response.json())
         .then(data => setCardsRemaining(data.remaining))
         .catch((err) => console.error(err));
-
     };
 
     useEffect(() => {
@@ -54,8 +52,8 @@ function Dealer() {
                 const data = await response.json();
                 // console.log('data', data.remaining);
                 setCardsRemaining(data.remaining)
-                if (data.remaining < 10) {
-                    // console.log('data is zero');
+                if (cardsRemaining <= 10) {
+                    console.log('data is zero');
                     shuffleDeck();
                 }
                 dealer_cards.push(data.cards[0]);
@@ -64,7 +62,6 @@ function Dealer() {
             };
             addDealerCards();
         }
-        // dealDealerCards();
     }, [gameTurn]);
 
 
@@ -84,9 +81,6 @@ function Dealer() {
             console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
     }, [dealerScore]);
-
-    // console.log('dealerScore', dealerScore);
-    // console.log('props', props);
 
     return (
         <div className="dealer__container--main">

@@ -77,10 +77,6 @@ function Player(props) {
         });
     }, [playerCards]);
 
-    // console.log('playerCards', playerCards);
-    // console.log('playerScore', playerScore);
-    // console.log('playerProps', props.props);
-
     if (props.props === "true") {
         console.log('player true');
     }
@@ -93,8 +89,6 @@ function Player(props) {
         player_cards.push(data.cards[0]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
     }
-
-    // console.log('hitPlayer', playerNumCards);
 
     return (
         <div>

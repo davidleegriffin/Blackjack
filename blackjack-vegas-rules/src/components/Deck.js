@@ -6,8 +6,6 @@ function Deck() {
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
 
-
-
     function newDeck() {
         fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2')
         .then(response => response.json())
@@ -25,7 +23,7 @@ function Deck() {
     const standPlayer = async () => {
         await setStandButton("true");
         await dispatch(gameActions.gameTurn(true))
-      };
+    };
 
     return (
         <div>
