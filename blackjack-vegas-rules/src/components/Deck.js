@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch } from "react-redux";
 import * as gameActions from '../store/gameActions';
 
@@ -12,14 +12,19 @@ function Deck() {
         .then(response => response.json())
         .then(data => localStorage.setItem("deck", data.deck_id))
         .catch((err) => console.error(err));
-        // setTimeout(function() { window.location.reload(); }, 1500);
         // newHand();
     };
-
+    
     //GENERATE NEW HAND/RELOAD-----------------------
     function newHand() {
-        window.location.reload();
+        setStandButton("");
+        setTimeout(function() { window.location.reload(); }, 750);
+        // window.location.reload();
     };
+    
+    useEffect(() => {
+        dispatch(gameActions.gameStatus({'gameStatus': ''}));
+    }, [standButton]);
 
     //PLAYER STAND PAT-----------------------------
     const standPlayer = async () => {

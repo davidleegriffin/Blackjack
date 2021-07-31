@@ -9,6 +9,7 @@ function Player(props) {
     const [playerCards, setPlayerCards] = useState([]);
     const [playerNumCards, setPlayerNumCards] = useState(2);
     const [playerScore, setPlayerScore] = useState(0);
+    const [playerBusted, setPlayerBusted] = useState(false);
     const [hitButton, setHitButton] = useState("");
 
     //DETERMINE GAME TURN-----------------------------------
@@ -17,7 +18,7 @@ function Player(props) {
     useEffect(() => {
         if (gameTurn === true) {
             setHitButton("true");
-            console.log('reduxGameTurn', gameTurn);
+            // console.log('reduxGameTurn', gameTurn);
         }
     }, [dealerScore]);
 
@@ -25,8 +26,9 @@ function Player(props) {
     useEffect(() => {
         function checkScore() {
             if (playerScore > 21) {
+                setPlayerBusted("true");
                 setHitButton("true");
-                setTimeout(function() { window.location.reload(); }, 750);
+                // setTimeout(function() { window.location.reload(); }, 750);
                 setPlayerScore(0);
                 return (
                     <div className="player__card--image">
@@ -44,8 +46,10 @@ function Player(props) {
     }, [playerScore]);
 
     useEffect(() => {
-        dispatch(gameActions.gameStatus({'gameStatus': 'HOUSE WINS'}))
-    }, [hitButton]);
+        if(playerBusted === "true") {
+            dispatch(gameActions.gameStatus({'gameStatus': 'HOUSE WINS'}));
+        }
+    }, [playerBusted]);
 
     //DEAL INITIAL PLAYER CARDS--------------------
     useEffect(() => {

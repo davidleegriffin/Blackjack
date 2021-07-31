@@ -6,14 +6,19 @@ import '../App.css';
 function Dealer() {
     const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
-    const standButton = localStorage.getItem("standButton");
+    // const standButton = localStorage.getItem("standButton");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
+    const [dealerBust, setDealerBust] = useState(false);
     let playerScore = useSelector(state => state.playerScore?.playerScore);
     let gameTurn = useSelector(state => state.gameTurn);
-    console.log('reduxPlayerScore', playerScore);
+    let gameStatus = useSelector(state => state.gameStatus?.gameStatus);
+    // console.log('reduxPlayerScore', playerScore);
+    if (gameStatus) {
+    console.log('++++++++++++++++++++++++++++reduxGameStatus', gameStatus);
+    };
 
     //SHUFFLE THE CURRENT DECK---------------------------------------------------------
     function shuffleDeck() {
@@ -22,6 +27,32 @@ function Dealer() {
         .then(data => setCardsRemaining(data.remaining))
         .catch((err) => console.error(err));
     };
+
+    //CHECK SCORE AND DETERMINE OUTCOME--------------------
+    useEffect(() => {
+        function checkScore() {
+            if (dealerScore > 21) {
+                setDealerBust(true);
+                setTimeout(function() { window.location.reload(); }, 750);
+                setDealerScore(0);
+                return (
+                    <div className="dealer__card--image">
+                    {dealerCards.map((card, index) => {
+                        return (
+                            <div key={index}>
+                                <img src={card[0]?.image} />
+                            </div>
+                        );})}
+                    </div>
+                )
+            };
+        };
+        checkScore();
+    }, [dealerScore]);
+
+    // useEffect(() => {
+    //     dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
+    // }, [dealerBust === "true"]);
 
     //DEAL INITIAL DEALER CARD--------------------------------------------------------------------------
     useEffect(() => {
@@ -47,11 +78,11 @@ function Dealer() {
                 const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
                 const data = await response.json();
                 // console.log('data', data.remaining);
-                setCardsRemaining(data.remaining)
+                setCardsRemaining(data.remaining);
                 if (cardsRemaining <= 10) {
                     console.log('data is zero');
                     shuffleDeck();
-                }
+                };
                 dealer_cards.push(data.cards[0]);
                 // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
@@ -59,6 +90,13 @@ function Dealer() {
             addDealerCards();
         }
     }, [gameTurn]);
+
+    //DEALER AI---------------------------------------------------------
+    useEffect(() => {
+        if ((gameTurn) && (dealerScore < 17)) {
+            console.log('dealer has less than 21-------------------');
+        }
+    }, [dealerScore]);
 
     //TALLY DEALER SCORE------------------------------------------------
     useEffect(() => {
@@ -85,8 +123,10 @@ function Dealer() {
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
     }, [dealerScore]);
 
+    //RETURN----------------------------------------------------------------
     return (
         <div className="dealer__container--main">
+            {gameStatus && <h1>GAMESTATUS</h1>}
             <div className="dealer__container--remaining">
                 <h3>
                     <h1>{ cardsRemaining }</h1>
