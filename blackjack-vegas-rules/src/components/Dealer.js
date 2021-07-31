@@ -11,9 +11,9 @@ function Dealer() {
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
-
+    let playerScore = useSelector(state => state.playerScore?.playerScore);
     let gameTurn = useSelector(state => state.gameTurn);
-    // console.log('gameTurn', gameTurn);
+    console.log('reduxPlayerScore', playerScore);
 
     //SHUFFLE THE CURRENT DECK---------------------------------------------------------
     function shuffleDeck() {
@@ -73,7 +73,7 @@ function Dealer() {
                 setDealerScore(dealerScore + 1);
                 if ((dealerScore + 10) <= 21) {
                     // console.log('is alright');
-                    setDealerScore(dealerScore + 10);
+                    setDealerScore(dealerScore + 11);
                 }
             };
         });

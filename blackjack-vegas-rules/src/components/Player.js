@@ -1,46 +1,51 @@
 import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as gameActions from '../store/gameActions';
 
 function Player(props) {
     const deckId = localStorage.getItem("deck");
     const royals = ["KING", "QUEEN", "JACK", "10"];
+    const dispatch = useDispatch();
     const [playerCards, setPlayerCards] = useState([]);
     const [playerNumCards, setPlayerNumCards] = useState(2);
     const [playerScore, setPlayerScore] = useState(0);
     const [hitButton, setHitButton] = useState("");
 
+    //DETERMINE GAME TURN-----------------------------------
+    let gameTurn = useSelector(state => state.gameTurn);
+    let dealerScore = useSelector(state => state.dealerScore);
+    useEffect(() => {
+        if (gameTurn === true) {
+            setHitButton("true");
+            console.log('reduxGameTurn', gameTurn);
+        }
+    }, [dealerScore]);
+
     //CHECK SCORE AND DETERMINE OUTCOME--------------------
-    function checkScore() {
-        // console.log('playernumcards', playerNumCards);
-        if (playerNumCards >= 5) {
-            setPlayerNumCards(0);
-            return (
-                <div className="player__card--image">
+    useEffect(() => {
+        function checkScore() {
+            if (playerScore > 21) {
+                setHitButton("true");
+                setTimeout(function() { window.location.reload(); }, 750);
+                setPlayerScore(0);
+                return (
+                    <div className="player__card--image">
                     {playerCards.map((card, index) => {
                         return (
                             <div key={index}>
                                 <img src={card[0]?.image} />
                             </div>
-                            );})}
-                </div>
-            )
-        }
-        if (playerScore > 21) {
-            setHitButton("true");
-            setTimeout(function() { window.location.reload(); }, 1500);
-            setPlayerScore(0);
-            return (
-                <div className="player__card--image">
-                {playerCards.map((card, index) => {
-                    return (
-                        <div key={index}>
-                            <img src={card[0]?.image} />
-                        </div>
-                    );})}
-                </div>
-            )
+                        );})}
+                    </div>
+                )
+            };
         };
-    };
-    checkScore();
+        checkScore();
+    }, [playerScore]);
+
+    useEffect(() => {
+        dispatch(gameActions.gameStatus({'gameStatus': 'HOUSE WINS'}))
+    }, [hitButton]);
 
     //DEAL INITIAL PLAYER CARDS--------------------
     useEffect(() => {
@@ -70,13 +75,19 @@ function Player(props) {
                 setPlayerScore(playerScore + 1);
                 if ((playerScore + 10) <= 21) {
                     // console.log('is alright');
-                    setPlayerScore(playerScore + 10);
+                    setPlayerScore(playerScore + 11);
                 }
             }
             // checkScore();
         });
     }, [playerCards]);
-
+ 
+    //DISPATCH PLAYER SCORE--------------------------------------------------
+    useEffect(() => {
+    console.log('playerScore', playerScore);
+    dispatch(gameActions.playerScore({'playerScore': playerScore}))
+}, [playerScore]);
+    
     //ADD PLAYER CARD(S)---------------------------
     async function hitPlayer() {
         setPlayerNumCards(playerNumCards + 1);
@@ -86,6 +97,7 @@ function Player(props) {
         player_cards.push(data.cards[0]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
     }
+
 
     return (
         <div>

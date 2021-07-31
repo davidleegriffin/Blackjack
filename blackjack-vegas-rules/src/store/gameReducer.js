@@ -3,6 +3,7 @@ import {
     PLAYER_SCORE,
     DEALER_SCORE,
     GAME_TURN,
+    GAME_STATUS,
     CARDS_REMAINING,
 } from './gameActions';
 
@@ -13,13 +14,16 @@ const gameReducer = (state = {}, action) => {
             newState = Object.assign({}, action.deck_id);
             return newState;
         case PLAYER_SCORE:
-            newState = Object.assign({}, action.player_score);
+            newState = {...state, 'playerScore': action.player_score};
             return newState;
         case DEALER_SCORE:
-            newState = Object.assign({}, action.dealer_score);
+            newState = {...state, 'dealerScore': action.dealer_score};
             return newState;
         case GAME_TURN:
-            newState = {'gameTurn': action.game_turn};
+            newState = {...state, 'gameTurn': action.game_turn};
+            return newState;
+        case GAME_STATUS:
+            newState = {...state, 'gameStatus': action.game_status};
             return newState;
         case CARDS_REMAINING:
             newState = {'cardsRemaining': action.cards_remaining};

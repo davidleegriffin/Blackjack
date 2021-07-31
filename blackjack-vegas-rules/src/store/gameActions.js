@@ -2,6 +2,7 @@ export const DECK_ID = 'DECK_ID';
 export const PLAYER_SCORE = 'PLAYER_SCORE';
 export const DEALER_SCORE = 'DEALER_SCORE';
 export const GAME_TURN = 'GAME_TURN';
+export const GAME_STATUS = 'GAME_STATUS';
 export const CARDS_REMAINING = 'CARDS_REMAINING';
 
 export const deckId = (deck_id) => {
@@ -30,6 +31,13 @@ export const gameTurn = (game_turn) => {
         type: GAME_TURN,
         game_turn,
     };
+};
+
+export const gameStatus = (game_status) => {
+    return {
+        type: GAME_STATUS,
+        game_status,
+    }
 };
 
 export const cardsRemaining = (cards_remaining) => {
