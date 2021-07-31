@@ -32,8 +32,8 @@ function Dealer() {
     useEffect(() => {
         function checkScore() {
             if (dealerScore > 21) {
-                setDealerBust(true);
-                setTimeout(function() { window.location.reload(); }, 750);
+                setDealerBust("true");
+                // setTimeout(function() { window.location.reload(); }, 750);
                 setDealerScore(0);
                 return (
                     <div className="dealer__card--image">
@@ -50,9 +50,11 @@ function Dealer() {
         checkScore();
     }, [dealerScore]);
 
-    // useEffect(() => {
-    //     dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
-    // }, [dealerBust === "true"]);
+    useEffect(() => {
+      if (dealerBust === "true") {
+        dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
+        } 
+    }, [dealerBust]);
 
     //DEAL INITIAL DEALER CARD--------------------------------------------------------------------------
     useEffect(() => {
@@ -94,9 +96,28 @@ function Dealer() {
     //DEALER AI---------------------------------------------------------
     useEffect(() => {
         if ((gameTurn) && (dealerScore < 17)) {
-            console.log('dealer has less than 21-------------------');
+            // console.log('dealer has less than 21-------------------');
+            const addDealerCards = async () => {
+                let dealer_cards = [];
+                const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
+                const data = await response.json();
+                // console.log('data', data.remaining);
+                setCardsRemaining(data.remaining);
+                if (cardsRemaining <= 10) {
+                    console.log('data is zero');
+                    shuffleDeck();
+                };
+                dealer_cards.push(data.cards[0]);
+                // dealer_cards.push(data.cards[1]);
+                setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
+            };
+            addDealerCards();
         }
     }, [dealerScore]);
+
+    if ((gameTurn) && (dealerScore >= 17)) {
+        console.log('test here+++++++++++++++++++++++++');
+    }
 
     //TALLY DEALER SCORE------------------------------------------------
     useEffect(() => {
@@ -126,8 +147,8 @@ function Dealer() {
     //RETURN----------------------------------------------------------------
     return (
         <div className="dealer__container--main">
-            {gameStatus && <h1>GAMESTATUS</h1>}
             <div className="dealer__container--remaining">
+                {gameStatus && <div className="dealer__container--gameStatus"><h1>{ gameStatus }</h1></div>}
                 <h3>
                     <h1>{ cardsRemaining }</h1>
                     Cards Remaining in Deck

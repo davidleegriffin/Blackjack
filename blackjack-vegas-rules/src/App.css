@@ -40,10 +40,10 @@
 }
 
 .App__button--stand {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  height: 100%;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-self: center;  */
+  /* height: 100%; */
 }
 
 .dealer__container--main {
@@ -53,6 +53,13 @@
   align-content: center;
   align-content: center;
   padding-top: 25px;
+}
+
+.dealer__container--gameStatus {
+  display: flex;
+  /* justify-content: center; */
+  align-self: center;
+
 }
 
 .dealer__container--remaining {

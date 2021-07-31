@@ -12,7 +12,7 @@ function Deck() {
         .then(response => response.json())
         .then(data => localStorage.setItem("deck", data.deck_id))
         .catch((err) => console.error(err));
-        // newHand();
+        newHand();
     };
     
     //GENERATE NEW HAND/RELOAD-----------------------
@@ -34,9 +34,9 @@ function Deck() {
 
     return (
         <div>
+            <button className="App__button--stand" disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
             <button onClick ={newHand}>New Hand</button>
             <button onClick={() => {newDeck()}}>New Deck</button>
-            <button className="App__button--stand" disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
 
         </div>
     )

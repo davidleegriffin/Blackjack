@@ -47,7 +47,7 @@ function Player(props) {
 
     useEffect(() => {
         if(playerBusted === "true") {
-            dispatch(gameActions.gameStatus({'gameStatus': 'HOUSE WINS'}));
+            dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
         }
     }, [playerBusted]);
 
