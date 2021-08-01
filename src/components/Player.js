@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as gameActions from '../store/gameActions';
 
 function Player(props) {
-    const deckId = useSelector(state => state.deckId);
-    console.log('playerDeckId', deckId);
+    const deckId = localStorage.getItem("deck");
+    const reduxDeckId = useSelector(state => state?.deckId);
+    console.log('playerDeckId', reduxDeckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const dispatch = useDispatch();
     const [playerCards, setPlayerCards] = useState([]);

@@ -11,7 +11,7 @@ const gameReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case DECK_ID:
-            newState = Object.assign({}, action.deck_id);
+            newState = {...state, 'deckId': action.deck_id};
             return newState;
         case PLAYER_SCORE:
             newState = {...state, 'playerScore': action.player_score};
