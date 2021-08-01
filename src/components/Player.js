@@ -40,12 +40,11 @@ function Player(props) {
             let player_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            console.log('playerData', data);
-            console.log('playerDeckId', deckId);
-            console.log('playerReduxDeckId', reduxDeckId);
-            console.log(deckId === reduxDeckId);
+            // console.log('playerData', data);
+            // console.log('playerDeckId', deckId);
+            // console.log('playerReduxDeckId', reduxDeckId);
+            // console.log(deckId === reduxDeckId);
             player_cards.push(data?.cards[0]);
-            // player_cards.push(data.cards[1]);
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
         dealPlayerCards();

@@ -89,7 +89,7 @@ function Dealer() {
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
                 setDealerNumCards(dealerNumCards + 1);
             };
-            console.log('dealerScore in effect', dealerScore);
+            // console.log('dealerScore in effect', dealerScore);
             addDealerCards();
         }
     }, [dealerNumCards]);
