@@ -13,8 +13,13 @@ function Deck() {
             const data = await response.json();
             await console.log('deckData', data);
             await localStorage.setItem("deck", data.deck_id);
-            // newHand();
+            newHand();
         };
+
+        // useEffect(() => {
+        //     newDeck();
+        //     console.log('useEffect at start');
+        // }, []);
 
     let newDeckId = localStorage.getItem("deck");
     console.log('localStorageDeckId', newDeckId);
