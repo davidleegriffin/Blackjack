@@ -4,7 +4,8 @@ import * as gameActions from '../store/gameActions';
 
 function Deck() {
 
-    localStorage.setItem("test3", "testing3");
+    localStorage.setItem("test", "TESTING");
+    // localStorage.setItem("test3", "testing3");
 
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
@@ -46,8 +47,8 @@ function Deck() {
 
     return (
         <div className="deck__container--main">
-            <button disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
-            <button onClick ={newHand}>NEW HAND</button>
+            <button disabled={`${standButton}`} onClick={standPlayer}>PLAYER STAND</button>
+            <button className="deck__button--newHand" onClick ={newHand}>NEW HAND</button>
             <button onClick={() => {newDeck()}}>NEW DECK</button>
 
         </div>

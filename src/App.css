@@ -29,6 +29,7 @@
 .App__players--container {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 75px;
 }
 
 .deck__container--main {
@@ -36,6 +37,29 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.player__button--hitMe:hover {
+    animation: pulse .35s ease-in .15s;
+}
+
+@keyframes pulse {
+  0% {
+    outline: 2.5px solid gold;
+    outline-offset: 2px;
+    box-shadow: 2px 2px 4px 1px black;
+  }
+  50% {
+    outline: 20px solid gold;
+    outline-offset: 15px;
+    box-shadow: 0px 0px 10px 15px gold;
+    border-radius: 0px;
+  }
+  100% {
+    outline: 2.5px solid gold;
+    outline-offset: 2px;
+    box-shadow: 2px 2px 4px 1px black;
+  }
 }
 
 .player__card--image {

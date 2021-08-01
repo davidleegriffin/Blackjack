@@ -116,7 +116,7 @@ function Player(props) {
     return (
         <div>
             <h1>Player Score: {playerScore}</h1>
-            <button disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
+            <button className="player__button--hitMe" disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
             <div>
                 <div className="player__card--image">
                     {playerCards.map((card, index) => {

@@ -7,7 +7,6 @@ import './index.css';
 import App from './App';
 
 const store = configureStore();
-localStorage.setItem("test", "TESTING");
 
 function Root() {
   return (
