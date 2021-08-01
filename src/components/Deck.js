@@ -7,13 +7,13 @@ function Deck() {
     const dispatch = useDispatch();
 
     //GET A NEW DECK FROM DECKOFCARDS.API-------------------------------------
-    function newDeck() {
-        fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
-        .then(response => response.json())
-        .then(data => localStorage.setItem("deck", data.deck_id))
-        .catch((err) => console.error(err));
-        newHand();
-    };
+
+        const newDeck = async () => {
+            const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
+            const data = await response.json();
+            localStorage.setItem("deck", data.deck_id);
+            newHand();
+        };
 
     let newDeckId = localStorage.getItem("deck");
     // console.log('newDeckId', newDeckId);

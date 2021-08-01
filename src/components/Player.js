@@ -4,10 +4,10 @@ import * as gameActions from '../store/gameActions';
 
 function Player(props) {
     const deckId = localStorage.getItem("deck");
-    console.log('+playerDeckId', deckId);
+    // console.log('+playerDeckId', deckId);
     const reduxDeckId = useSelector(state => state.deckId?.deckId);
-    console.log('+playerReduxDeckId', reduxDeckId);
-    console.log(deckId === reduxDeckId);
+    // console.log('+playerReduxDeckId', reduxDeckId);
+    // console.log(deckId === reduxDeckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const dispatch = useDispatch();
     const [playerCards, setPlayerCards] = useState([]);
@@ -50,7 +50,7 @@ function Player(props) {
         };
         dealPlayerCards();
         dealPlayerCards();
-    }, [deckId]);
+    }, []);
 
     //TALLY PLAYER SCORE-------------------------
     useEffect(() => {
