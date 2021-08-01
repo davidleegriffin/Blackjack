@@ -31,19 +31,27 @@
   justify-content: space-evenly;
 }
 
+.deck__container--main {
+  height: 7.5%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .player__card--image {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
-  margin-top: 20%;
+  margin-top: 5%;
 }
 
-.App__button--stand {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-self: center;  */
-  /* height: 100%; */
+.dealer__card--image {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  margin-top: 20%;
 }
 
 .dealer__container--main {

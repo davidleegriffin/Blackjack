@@ -175,7 +175,7 @@ function Dealer() {
             </div>
             <div>
                 <h1>Dealer Score: { dealerScore }</h1>
-                <div className="player__card--image">
+                <div className="dealer__card--image">
                     {dealerCards.map((card, idx) => {
                         return (
                             <div  key={idx}>

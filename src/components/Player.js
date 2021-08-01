@@ -115,16 +115,18 @@ function Player(props) {
 
     return (
         <div>
-            <div className="player__card--image">
-                {playerCards.map((card, index) => {
-                    return (
-                        <div key={index} className="player__card--image">
-                            <img src={card[0]?.image} width="100" />
-                        </div>
-                        );})}
-            </div>
             <h1>Player Score: {playerScore}</h1>
             <button disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
+            <div>
+                <div className="player__card--image">
+                    {playerCards.map((card, index) => {
+                        return (
+                            <div key={index} className="player__card--image">
+                                <img src={card[0]?.image} width="100" />
+                            </div>
+                            );})}
+                </div>
+            </div>
         </div>
     )
 }

@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import * as gameActions from '../store/gameActions';
 
 function Deck() {
+
+    localStorage.setItem("test3", "testing3");
+
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
 
@@ -42,10 +45,10 @@ function Deck() {
     };
 
     return (
-        <div>
-            <button className="App__button--stand" disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
-            <button onClick ={newHand}>New Hand</button>
-            <button onClick={() => {newDeck()}}>New Deck</button>
+        <div className="deck__container--main">
+            <button disabled={`${standButton}`} onClick={() => standPlayer()}>PLAYER STAND</button>
+            <button onClick ={newHand}>NEW HAND</button>
+            <button onClick={() => {newDeck()}}>NEW DECK</button>
 
         </div>
     )
