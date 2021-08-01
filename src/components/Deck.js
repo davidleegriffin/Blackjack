@@ -22,7 +22,7 @@ function Deck() {
     //DISPATCH DECK_ID--------------------------------------
     useEffect(() => {
         dispatch(gameActions.deckId({'deckId': localDeckId}));
-    }, [newDeckId]);
+    }, [localDeckId]);
     
     //GENERATE NEW HAND/RELOAD-----------------------
     function newHand() {
