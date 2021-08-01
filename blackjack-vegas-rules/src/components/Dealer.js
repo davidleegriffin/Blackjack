@@ -17,7 +17,7 @@ function Dealer() {
     let gameStatus = useSelector(state => state.gameStatus?.gameStatus);
     // console.log('reduxPlayerScore', playerScore);
     if (gameStatus) {
-    console.log('++++++++++++++++++++++++++++reduxGameStatus', gameStatus);
+    // console.log('++++++++++++++++++++++++++++reduxGameStatus', gameStatus);
     };
 
     //SHUFFLE THE CURRENT DECK---------------------------------------------------------
@@ -115,9 +115,19 @@ function Dealer() {
         }
     }, [dealerScore]);
 
-    if ((gameTurn) && (dealerScore >= 17)) {
-        console.log('test here+++++++++++++++++++++++++');
-    }
+    useEffect(() => {
+        if ((gameTurn) && (dealerScore >= 17)) {
+            if(playerScore > dealerScore) {
+                console.log('player score greater than');
+                setDealerBust("true");
+            } else if (playerScore < dealerScore) {
+                console.log('player is less than dealer');
+                dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
+            } else {
+                console.log('equal==============');
+            }
+        };
+    }, [dealerScore]);
 
     //TALLY DEALER SCORE------------------------------------------------
     useEffect(() => {
