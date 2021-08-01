@@ -16,12 +16,11 @@ function Deck() {
     };
 
     let newDeckId = localStorage.getItem("deck");
-    console.log('newDeckId', newDeckId);
+    // console.log('newDeckId', newDeckId);
 
-    //DISPATCH DECK_ID
+    //DISPATCH DECK_ID--------------------------------------
     useEffect(() => {
         dispatch(gameActions.deckId({'deckId': newDeckId}));
-
     }, [newDeckId]);
     
     //GENERATE NEW HAND/RELOAD-----------------------

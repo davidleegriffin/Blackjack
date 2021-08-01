@@ -4,8 +4,10 @@ import * as gameActions from '../store/gameActions';
 
 function Player(props) {
     const deckId = localStorage.getItem("deck");
-    const reduxDeckId = useSelector(state => state?.deckId);
-    console.log('playerDeckId', reduxDeckId);
+    // console.log('playerDeckId', deckId);
+    const reduxDeckId = useSelector(state => state.deckId?.deckId);
+    // console.log('playerReduxDeckId', reduxDeckId);
+    // console.log(deckId === reduxDeckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const dispatch = useDispatch();
     const [playerCards, setPlayerCards] = useState([]);
@@ -13,6 +15,8 @@ function Player(props) {
     const [playerScore, setPlayerScore] = useState(0);
     const [playerBusted, setPlayerBusted] = useState(false);
     const [hitButton, setHitButton] = useState("");
+    const [playerDeckId, setPlayerDeckId] = useState();
+    
 
     //DETERMINE GAME TURN-----------------------------------
     let gameTurn = useSelector(state => state.gameTurn);
@@ -37,13 +41,16 @@ function Player(props) {
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
             console.log('playerData', data);
+            console.log('playerDeckId', deckId);
+            console.log('playerReduxDeckId', reduxDeckId);
+            console.log(deckId === reduxDeckId);
             player_cards.push(data?.cards[0]);
             // player_cards.push(data.cards[1]);
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
         dealPlayerCards();
         dealPlayerCards();
-    }, []);
+    }, [deckId]);
 
     //TALLY PLAYER SCORE-------------------------
     useEffect(() => {
@@ -68,7 +75,7 @@ function Player(props) {
  
     //DISPATCH PLAYER SCORE--------------------------------------------------
     useEffect(() => {
-    console.log('playerScore', playerScore);
+    // console.log('playerScore', playerScore);
     dispatch(gameActions.playerScore({'playerScore': playerScore}))
 }, [playerScore]);
 

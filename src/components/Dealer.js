@@ -6,8 +6,8 @@ import '../App.css';
 function Dealer() {
     const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
-    const reduxDeckId = useSelector(state => state?.deckId);
-    console.log('dealerDeckId', deckId);
+    const reduxDeckId = useSelector(state => state.deckId?.deckId);
+    // console.log('reduxDeckId', reduxDeckId);
     // const standButton = localStorage.getItem("standButton");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
@@ -41,7 +41,7 @@ function Dealer() {
             // if (cardsRemaining < 10) {
             //     shuffleDeck();
             // }
-            console.log('dealerData', data);
+            // console.log('dealerData', data);
             dealer_cards.push(data?.cards[0]);
             setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
         };
@@ -115,7 +115,7 @@ function Dealer() {
 
     //DISPATCH DEALER SCORE--------------------------------------------------
     useEffect(() => {
-            console.log('dealerScore', dealerScore);
+            // console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
     }, [dealerScore]);
 
@@ -151,13 +151,13 @@ function Dealer() {
     useEffect(() => {
         if ((gameTurn) && (dealerScore >= 17)) {
             if(playerScore > dealerScore) {
-                console.log('player score greater than');
+                // console.log('player score greater than');
                 dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}));
             } else if (playerScore < dealerScore) {
-                console.log('player is less than dealer');
+                // console.log('player is less than dealer');
                 dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
             } else {
-                console.log('equal==============');
+                // console.log('equal==============');
                 dispatch(gameActions.gameStatus({'gameStatus': '<---PUSH--->'}));
             }
         };
@@ -178,8 +178,8 @@ function Dealer() {
                 <div className="player__card--image">
                     {dealerCards.map((card, idx) => {
                         return (
-                            <div>
-                                <img key={idx} src={card[0]?.image} width="100" />
+                            <div  key={idx}>
+                                <img src={card[0]?.image} width="100" />
                             </div>
                             );})}
                 </div>
