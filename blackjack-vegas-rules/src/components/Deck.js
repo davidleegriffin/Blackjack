@@ -18,7 +18,7 @@ function Deck() {
     //GENERATE NEW HAND/RELOAD-----------------------
     function newHand() {
         setStandButton("");
-        setTimeout(function() { window.location.reload(); }, 750);
+        setTimeout(function() { window.location.reload(); }, 500);
         // window.location.reload();
     };
     

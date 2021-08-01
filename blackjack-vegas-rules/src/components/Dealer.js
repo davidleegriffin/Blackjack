@@ -12,6 +12,7 @@ function Dealer() {
     const [dealerScore, setDealerScore] = useState(0);
     const [cardsRemaining, setCardsRemaining] = useState();
     const [dealerBust, setDealerBust] = useState(false);
+    const [dealerNumCards, setDealerNumCards] = useState(1);
     let playerScore = useSelector(state => state.playerScore?.playerScore);
     let gameTurn = useSelector(state => state.gameTurn);
     let gameStatus = useSelector(state => state.gameStatus?.gameStatus);
@@ -60,6 +61,7 @@ function Dealer() {
                 dealer_cards.push(data.cards[0]);
                 // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
+                setDealerNumCards(dealerNumCards + 1);
             };
             addDealerCards();
         }
@@ -82,11 +84,12 @@ function Dealer() {
                 dealer_cards.push(data.cards[0]);
                 // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
+                setDealerNumCards(dealerNumCards + 1);
             };
             console.log('dealerScore in effect', dealerScore);
             addDealerCards();
         }
-    }, [dealerScore]);
+    }, [dealerNumCards]);
 
     //TALLY DEALER SCORE------------------------------------------------
     useEffect(() => {
@@ -118,9 +121,18 @@ function Dealer() {
         function checkScore() {
             if (dealerScore > 21) {
                 setDealerBust("true");
-                setDealerCards([]);
+                // setDealerCards([]);
                 setDealerScore(0);
-
+                return (
+                    <div className="player__card--image">
+                    {dealerCards.map((card, index) => {
+                        return (
+                            <div key={index}>
+                                <img src={card[0]?.image} />
+                            </div>
+                        );})}
+                    </div>
+                )
             };
         };
         checkScore();
