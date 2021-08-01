@@ -122,15 +122,16 @@ function Dealer() {
             if (dealerScore > 21) {
                 setDealerBust("true");
                 // setDealerCards([]);
-                setDealerScore(0);
+                setDealerScore('BUSTED');
                 return (
                     <div className="player__card--image">
-                    {dealerCards.map((card, index) => {
-                        return (
-                            <div key={index}>
-                                <img src={card[0]?.image} />
-                            </div>
-                        );})}
+                        <h2>BUSTED</h2>
+                        {dealerCards.map((card, index) => {
+                            return (
+                                <div key={index}>
+                                    <img src={card[0]?.image} />
+                                </div>
+                            );})}
                     </div>
                 )
             };

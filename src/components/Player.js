@@ -22,29 +22,6 @@ function Player(props) {
         }
     }, [dealerScore]);
 
-    //CHECK SCORE AND DETERMINE OUTCOME--------------------
-    useEffect(() => {
-        function checkScore() {
-            if (playerScore > 21) {
-                setPlayerBusted("true");
-                setHitButton("true");
-                // setTimeout(function() { window.location.reload(); }, 750);
-                setPlayerScore(0);
-                return (
-                    <div className="player__card--image">
-                    {playerCards.map((card, index) => {
-                        return (
-                            <div key={index}>
-                                <img src={card[0]?.image} />
-                            </div>
-                        );})}
-                    </div>
-                )
-            };
-        };
-        checkScore();
-    }, [playerScore]);
-
     useEffect(() => {
         if(playerBusted === "true") {
             dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
@@ -57,7 +34,7 @@ function Player(props) {
             let player_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            player_cards.push(data.cards[0]);
+            player_cards.push(data?.cards[0]);
             // player_cards.push(data.cards[1]);
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
@@ -91,6 +68,30 @@ function Player(props) {
     console.log('playerScore', playerScore);
     dispatch(gameActions.playerScore({'playerScore': playerScore}))
 }, [playerScore]);
+
+    //CHECK SCORE AND DETERMINE OUTCOME--------------------
+    useEffect(() => {
+        function checkScore() {
+            if (playerScore > 21) {
+                setPlayerBusted("true");
+                setHitButton("true");
+                // setTimeout(function() { window.location.reload(); }, 750);
+                setPlayerScore('BUSTED');
+                return (
+                    <div className="player__card--image">
+                  
+                    {playerCards.map((card, index) => {
+                        return (
+                            <div key={index}>
+                                <img src={card[0]?.image} />
+                            </div>
+                        );})}
+                    </div>
+                )
+            };
+        };
+        checkScore();
+    }, [playerScore]);
     
     //ADD PLAYER CARD(S)---------------------------
     async function hitPlayer() {
