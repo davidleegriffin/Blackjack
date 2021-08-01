@@ -12,21 +12,16 @@ function Deck() {
             const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
             const data = await response.json();
             await console.log('deckData', data);
-            await localStorage.setItem("deck", data.deck_id);
-            newHand();
+            await localStorage.setItem("deck", data?.deck_id);
+            // newHand();
         };
 
-        // useEffect(() => {
-        //     newDeck();
-        //     console.log('useEffect at start');
-        // }, []);
-
-    let newDeckId = localStorage.getItem("deck");
-    console.log('localStorageDeckId', newDeckId);
+    let localDeckId = localStorage.getItem("deck");
+    console.log('localStorageDeckId', localDeckId);
 
     //DISPATCH DECK_ID--------------------------------------
     useEffect(() => {
-        dispatch(gameActions.deckId({'deckId': newDeckId}));
+        dispatch(gameActions.deckId({'deckId': localDeckId}));
     }, [newDeckId]);
     
     //GENERATE NEW HAND/RELOAD-----------------------
