@@ -23,7 +23,7 @@ function Dealer() {
 
     //SHUFFLE THE CURRENT DECK---------------------------------------------------------
     function shuffleDeck() {
-        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=2')
+        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
         .then(response => response.json())
         .then(data => setCardsRemaining(data.remaining))
         .catch((err) => console.error(err));
@@ -39,7 +39,7 @@ function Dealer() {
             if (cardsRemaining < 10) {
                 shuffleDeck();
             }
-            dealer_cards.push(data.cards[0]);
+            dealer_cards.push(data?.cards[0]);
             setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
         };
         dealDealerCards();
@@ -155,7 +155,7 @@ function Dealer() {
                 dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
             } else {
                 console.log('equal==============');
-                dispatch(gameActions.gameStatus({'gameStatus': 'PUSH'}));
+                dispatch(gameActions.gameStatus({'gameStatus': '<---PUSH--->'}));
             }
         };
     }, [dealerScore]);
