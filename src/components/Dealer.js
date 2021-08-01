@@ -5,7 +5,8 @@ import '../App.css';
 
 function Dealer() {
     const dispatch = useDispatch();
-    const deckId = localStorage.getItem("deck");
+    const deckId = useSelector(state => state.deckId);
+    console.log('dealerDeckId', deckId);
     // const standButton = localStorage.getItem("standButton");
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
@@ -35,10 +36,11 @@ function Dealer() {
             let dealer_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            setCardsRemaining(data.remaining);
-            if (cardsRemaining < 10) {
-                shuffleDeck();
-            }
+            // setCardsRemaining(data.remaining);
+            // if (cardsRemaining < 10) {
+            //     shuffleDeck();
+            // }
+            console.log('dealerData', data);
             dealer_cards.push(data?.cards[0]);
             setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
         };
