@@ -28,34 +28,6 @@ function Dealer() {
         .catch((err) => console.error(err));
     };
 
-    //CHECK SCORE AND DETERMINE OUTCOME--------------------
-    useEffect(() => {
-        function checkScore() {
-            if (dealerScore > 21) {
-                setDealerBust("true");
-                // setTimeout(function() { window.location.reload(); }, 750);
-                setDealerScore(0);
-                return (
-                    <div className="dealer__card--image">
-                    {dealerCards.map((card, index) => {
-                        return (
-                            <div key={index}>
-                                <img src={card[0]?.image} />
-                            </div>
-                        );})}
-                    </div>
-                )
-            };
-        };
-        checkScore();
-    }, [dealerScore]);
-
-    useEffect(() => {
-      if (dealerBust === "true") {
-        dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
-        } 
-    }, [dealerBust]);
-
     //DEAL INITIAL DEALER CARD--------------------------------------------------------------------------
     useEffect(() => {
         const dealDealerCards = async () => {
@@ -103,30 +75,17 @@ function Dealer() {
                 const data = await response.json();
                 // console.log('data', data.remaining);
                 setCardsRemaining(data.remaining);
-                if (cardsRemaining <= 10) {
-                    console.log('data is zero');
-                    shuffleDeck();
-                };
+                // if (cardsRemaining <= 10) {
+                //     console.log('data is zero');
+                //     shuffleDeck();
+                // };
                 dealer_cards.push(data.cards[0]);
                 // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
             };
+            console.log('dealerScore in effect', dealerScore);
             addDealerCards();
         }
-    }, [dealerScore]);
-
-    useEffect(() => {
-        if ((gameTurn) && (dealerScore >= 17)) {
-            if(playerScore > dealerScore) {
-                console.log('player score greater than');
-                setDealerBust("true");
-            } else if (playerScore < dealerScore) {
-                console.log('player is less than dealer');
-                dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
-            } else {
-                console.log('equal==============');
-            }
-        };
     }, [dealerScore]);
 
     //TALLY DEALER SCORE------------------------------------------------
@@ -152,6 +111,40 @@ function Dealer() {
     useEffect(() => {
             console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
+    }, [dealerScore]);
+
+       //CHECK SCORE AND DETERMINE OUTCOME--------------------
+       useEffect(() => {
+        function checkScore() {
+            if (dealerScore > 21) {
+                setDealerBust("true");
+                setDealerCards([]);
+                setDealerScore(0);
+
+            };
+        };
+        checkScore();
+    }, [dealerScore]);
+
+    useEffect(() => {
+      if (dealerBust === "true") {
+        dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
+        } 
+    }, [dealerBust]);
+
+    useEffect(() => {
+        if ((gameTurn) && (dealerScore >= 17)) {
+            if(playerScore > dealerScore) {
+                console.log('player score greater than');
+                dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}));
+            } else if (playerScore < dealerScore) {
+                console.log('player is less than dealer');
+                dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
+            } else {
+                console.log('equal==============');
+                dispatch(gameActions.gameStatus({'gameStatus': 'PUSH'}));
+            }
+        };
     }, [dealerScore]);
 
     //RETURN----------------------------------------------------------------
