@@ -18,6 +18,7 @@ function Deck() {
             await localStorage.setItem("deck", data?.deck_id);
             // newHand();
         };
+        initialDeck();
     }, []);
 
     //GET A NEW DECK FROM DECKOFCARDS.API-------------------------------------
