@@ -46,7 +46,7 @@ function Player(props) {
             // console.log(deckId === reduxDeckId);
             player_cards.push(data?.cards[0]);
             player_cards.push(data?.cards[1]);
-            setPlayerCards((playerCards) => [...playerCards, player_cards])
+            setPlayerCards((playerCards) => [...playerCards, ...player_cards])
         };
         dealPlayerCards();
         // dealPlayerCards();
