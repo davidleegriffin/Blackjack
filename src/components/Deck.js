@@ -14,7 +14,7 @@ function Deck() {
         const initialDeck = async () => {
             const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
             const data = await response.json();
-            await console.log('initialDeckData', data);
+            // await console.log('initialDeckData', data);
             await localStorage.setItem("deck", data?.deck_id);
             // newHand();
         };
@@ -25,13 +25,13 @@ function Deck() {
     const newDeck = async () => {
         const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
         const data = await response.json();
-        await console.log('deckData', data);
+        // await console.log('deckData', data);
         await localStorage.setItem("deck", data?.deck_id);
         newHand();
     };
 
     let localDeckId = localStorage.getItem("deck");
-    console.log('localStorageDeckId', localDeckId);
+    // console.log('localStorageDeckId', localDeckId);
 
     //DISPATCH DECK_ID--------------------------------------
     useEffect(() => {

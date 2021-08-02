@@ -4,7 +4,7 @@ import * as gameActions from '../store/gameActions';
 
 function Player(props) {
     const deckId = localStorage.getItem("deck");
-    console.log('+playerDeckId', deckId);
+    // console.log('+playerDeckId', deckId);
     const reduxDeckId = useSelector(state => state.deckId?.deckId);
     // console.log('+playerReduxDeckId', reduxDeckId);
     // console.log(deckId === reduxDeckId);
@@ -44,12 +44,14 @@ function Player(props) {
             // console.log('playerDeckId', deckId);
             // console.log('playerReduxDeckId', reduxDeckId);
             // console.log(deckId === reduxDeckId);
+            console.log('playerCards', playerCards);
             player_cards.push(data?.cards[0]);
             player_cards.push(data?.cards[1]);
-            setPlayerCards((playerCards) => [...playerCards, ...player_cards])
+            // console.log('player_cards', player_cards);
+            setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
         dealPlayerCards();
-        // dealPlayerCards();
+        dealPlayerCards();
     }, []);
 
     //TALLY PLAYER SCORE-------------------------
