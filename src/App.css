@@ -89,13 +89,27 @@
 
 .dealer__container--gameStatus {
   display: flex;
-  /* justify-content: center; */
+  background-color: red;
+  border: 7px solid gold;
+  outline: 3px solid black;
   align-self: center;
+  text-align: center;
+  padding: 7px;
+  /* color: black; */
+  /* -webkit-text-fill-color: white; 
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: black; */
+}
 
+.dealer__header--gameStatus {
+  text-align: center;
+  align-self: center;
+  color: black;
+  text-shadow: 1.5px 1.5px 3px #fff;
 }
 
 .dealer__container--remaining {
   margin-right: 50px;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   margin-top: -50px;
 }

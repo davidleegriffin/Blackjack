@@ -3,6 +3,7 @@ import Dealer from './components/Dealer';
 import Deck from './components/Deck';
 import Player from './components/Player';
 import './App.css';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Player />
           <Dealer />
         </div>
+        <Footer />
     </div>
   );
 }

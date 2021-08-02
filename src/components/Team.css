@@ -1,0 +1,114 @@
+.team__container--main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 1150px;
+}
+
+.team__container--mintbean {
+    border-radius: 15px 15px 0px 0px;
+    text-align: center;
+    width: 90%;
+    height: 20%;
+    
+    background: rgb(94,244,214);
+    background: linear-gradient(180deg, rgba(94,244,214,1) 33%, rgba(255,255,255,1) 66%);
+}
+.team__button--mintbean {
+    background: rgba(94,244,214, 0.7);
+    border-radius: 15px;
+    padding-bottom: 7px;
+    border: 5px solid #03B1FE;
+    box-shadow: 6px 6px 12px black;
+    margin-bottom: 30px;
+}
+
+.team__container--bios {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    background-color:white;
+    color: black;
+    width: 88%;
+    height: fit-content;
+    padding: 10px;
+}
+
+.team__container--bios img {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team__container--dave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team__bios--wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.team__bios--header {
+    text-align: center;
+}
+
+
+.team__bios--dave {
+    font-size: 15px;
+    /* font-weight: 215; */
+    margin-right: 10px;
+    border-left: 3px solid black; 
+    border-right: 3px solid black; 
+    padding-left: 10px;
+}
+
+.team__container--dave {
+    grid-column-start: auto;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+.team__container--shields {
+    border-radius:  0px 0px 15px 15px;
+    background-color:white;
+    color: black;
+    width: 90%;
+    height: 30%;
+    margin-bottom: 50px;
+}
+
+.team__button--home {
+    border-radius: 15px;
+    font-size: 30px;
+    height: 100px;
+    width: 400px;
+    /* margin-left: 30%; */
+    margin-top: 0;
+    margin-bottom: 80px;
+    box-shadow: 6px 6px 12px rgba(94,244,214, 0.75);
+}
+
+.team__shields--header {
+    padding: 20px;
+    background-color: white;
+    width: 86.2%;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.team__container--shields {
+    background: rgb(255,255,255);
+background: linear-gradient(180deg, rgba(255,255,255,1) 33%, rgba(94,244,214,1) 66%);
+}
+
+.team__shields--img {
+    margin-left: 15px;
+    margin-top: 15px;
+}

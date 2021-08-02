@@ -158,7 +158,7 @@ function Dealer() {
                 dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
             } else {
                 // console.log('equal==============');
-                dispatch(gameActions.gameStatus({'gameStatus': '<---PUSH--->'}));
+                dispatch(gameActions.gameStatus({'gameStatus': '     PUSH'}));
             }
         };
     }, [dealerScore]);
@@ -167,7 +167,11 @@ function Dealer() {
     return (
         <div className="dealer__container--main">
             <div className="dealer__container--remaining">
-                {gameStatus && <div className="dealer__container--gameStatus"><h1>{ gameStatus }</h1></div>}
+                {gameStatus && <div className="dealer__container--gameStatus">
+                                    <h1 className="dealer__header--gameStatus">
+                                        { gameStatus }
+                                    </h1>
+                                </div>}
                 <h3>
                     <h1>{ cardsRemaining }</h1>
                     Cards Remaining in Deck
