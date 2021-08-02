@@ -48,7 +48,7 @@ function Player(props) {
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
         dealPlayerCards();
-        dealPlayerCards();
+        // dealPlayerCards();
     }, []);
 
     //TALLY PLAYER SCORE-------------------------
