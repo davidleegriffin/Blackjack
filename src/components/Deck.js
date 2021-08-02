@@ -4,21 +4,30 @@ import * as gameActions from '../store/gameActions';
 
 function Deck() {
 
-    localStorage.setItem("test", "TESTING");
-    // localStorage.setItem("test3", "testing3");
+    localStorage.setItem("test3", "testing3");
 
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
 
-    //GET A NEW DECK FROM DECKOFCARDS.API-------------------------------------
-
-        const newDeck = async () => {
+    //INITIAL DECK ON LOAD---------------------------
+    useEffect(() => {
+        const initialDeck = async () => {
             const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
             const data = await response.json();
-            await console.log('deckData', data);
+            await console.log('initialDeckData', data);
             await localStorage.setItem("deck", data?.deck_id);
             // newHand();
         };
+    }, []);
+
+    //GET A NEW DECK FROM DECKOFCARDS.API-------------------------------------
+    const newDeck = async () => {
+        const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4')
+        const data = await response.json();
+        await console.log('deckData', data);
+        await localStorage.setItem("deck", data?.deck_id);
+        newHand();
+    };
 
     let localDeckId = localStorage.getItem("deck");
     console.log('localStorageDeckId', localDeckId);

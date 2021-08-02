@@ -95,6 +95,7 @@
 }
 
 .dealer__container--remaining {
-  margin-right: 120px;
-  margin-top: 75px;
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-top: -50px;
 }
