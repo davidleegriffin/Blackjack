@@ -36,7 +36,7 @@ npm start
 Basic rules of blackjack with dealer standing on 17 or above. Shuffle Deck anytime or select New Hand to begin. Dealer receives one card face up and player then has the initiative until they Stand at which point the dealer will draw until it reaches a score of 17 or more or goes Bust. once the dealer busts or stands the result is displayed with the results being either player or dealer win or a push/tie. Once a result is declared, continue playing by clicking New Hand or Shuffle Deck.
 
 
-# [Next](https://github.com/davidleegriffin/Blackjack#Next)
+# [Next Steps](https://github.com/davidleegriffin/Blackjack#Next)
 
 - Add Betting and Bank
 - Fix Ace bug in Scoring
