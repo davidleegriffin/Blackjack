@@ -79,7 +79,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
-  margin-top: 20%;
+  /* margin-top: 20%; */
 }
 
 .dealer__container--main {
@@ -88,7 +88,7 @@
   justify-content: center;
   align-content: center;
   align-content: center;
-  padding-top: 25px;
+  /* padding-top: 25px; */
 }
 
 .dealer__container--gameStatus {
