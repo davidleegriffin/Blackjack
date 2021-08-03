@@ -38,6 +38,6 @@ Basic rules of blackjack with dealer standing on 17 or above. Shuffle Deck anyti
 
 # [Next](https://github.com/davidleegriffin/Blackjack#Next)
 
-Add Betting and Bank
-Fix Ace bug in scoring
-Fix async irregularities on dealing cards
+- Add Betting and Bank
+- Fix Ace bug in scoring
+- Fix async irregularities on dealing cards
