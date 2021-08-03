@@ -1,12 +1,9 @@
-import React, {useState, setState} from 'react'
-import { NavLink, Link, Route, Redirect, useHistory, Switch } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom';
 import Team from '../components/Team';
-
 import './WelcomePage.css';
 
 export default function WelcomePage() {
-
-
 
     return (
     <>
@@ -21,9 +18,13 @@ export default function WelcomePage() {
                     at a later date if desired.
                 </p>
             <NavLink to={{pathname: "/blackjack"}}>
-                <button className="blackjack__button--home">CLICK HERE TO START</button>
+                <button className="blackjack__button--home">
+                    CLICK HERE TO START
+                </button>
             </NavLink>
-            <p classname="blackjack__image--example"><img src="./images/Blackjack-Gameplay.gif" alt="blackjack-screen-shot" width="90%"></img></p>
+            <p classname="blackjack__image--example">
+                <img src="./images/Blackjack-Gameplay.gif" alt="blackjack-screen-shot" width="90%"></img>
+            </p>
             </div>
             <Team />
         </div>

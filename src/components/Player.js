@@ -4,10 +4,7 @@ import * as gameActions from '../store/gameActions';
 
 function Player(props) {
     const deckId = localStorage.getItem("deck");
-    // console.log('+playerDeckId', deckId);
-    const reduxDeckId = useSelector(state => state.deckId?.deckId);
-    // console.log('+playerReduxDeckId', reduxDeckId);
-    // console.log(deckId === reduxDeckId);
+    // const reduxDeckId = useSelector(state => state.deckId?.deckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const dispatch = useDispatch();
     const [playerCards, setPlayerCards] = useState([]);
@@ -15,8 +12,7 @@ function Player(props) {
     const [playerScore, setPlayerScore] = useState(0);
     const [playerBusted, setPlayerBusted] = useState(false);
     const [hitButton, setHitButton] = useState("");
-    const [playerDeckId, setPlayerDeckId] = useState();
-
+    // const [playerDeckId, setPlayerDeckId] = useState();
 
     //DETERMINE GAME TURN-----------------------------------
     let gameTurn = useSelector(state => state.gameTurn);
@@ -24,10 +20,10 @@ function Player(props) {
     useEffect(() => {
         if (gameTurn === true) {
             setHitButton("true");
-            // console.log('reduxGameTurn', gameTurn);
         }
     }, [dealerScore]);
 
+    //DISPATCH GAME STATUS-----------------------------------
     useEffect(() => {
         if(playerBusted === "true") {
             dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
@@ -40,14 +36,7 @@ function Player(props) {
             let player_cards = [];
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
-            console.log('playerData', data);
-            // console.log('playerDeckId', deckId);
-            // console.log('playerReduxDeckId', reduxDeckId);
-            // console.log(deckId === reduxDeckId);
-            console.log('playerCards', playerCards);
             player_cards.push(data?.cards[0]);
-            // player_cards.push(data?.cards[1]);
-            // console.log('player_cards', player_cards);
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
         dealPlayerCards();
@@ -57,27 +46,21 @@ function Player(props) {
     //TALLY PLAYER SCORE-------------------------
     useEffect(() => {
         playerCards.forEach(ele => {
-            // console.log('ele', parseInt(ele[0].value))
             if (parseInt(ele[0]?.value)) {
-                // console.log('number', playerScore)
                 setPlayerScore(playerScore + parseInt(ele[0]?.value));
             } else if (royals.includes(ele[0]?.value)) {
-                // console.log('royals');
                 setPlayerScore(playerScore + 10);
             } else if (ele[0]?.value === "ACE") {
                 setPlayerScore(playerScore + 1);
                 if ((playerScore + 10) <= 21) {
-                    // console.log('is alright');
                     setPlayerScore(playerScore + 11);
                 }
             }
-            // checkScore();
         });
     }, [playerCards]);
- 
+
     //DISPATCH PLAYER SCORE--------------------------------------------------
     useEffect(() => {
-    // console.log('playerScore', playerScore);
     dispatch(gameActions.playerScore({'playerScore': playerScore}))
 }, [playerScore]);
 
@@ -87,11 +70,9 @@ function Player(props) {
             if (playerScore > 21) {
                 setPlayerBusted("true");
                 setHitButton("true");
-                // setTimeout(function() { window.location.reload(); }, 750);
                 setPlayerScore('BUSTED');
                 return (
-                    <div className="player__card--image">
-                  
+                    <div className="player__card--image">                  
                     {playerCards.map((card, index) => {
                         return (
                             <div key={index}>
@@ -115,13 +96,7 @@ function Player(props) {
         setPlayerCards((playerCards) => [...playerCards, player_cards])
     };
 
-    console.log('++playerCards++', playerCards.length);
-    if(playerCards.length < 2) {
-        console.log('less than 2 cards', playerCards);
-        // hitPlayer();
-    }
-
-
+    //RETURN-------------------------------------
     return (
         <div className="dealer__container--main">
             <div>

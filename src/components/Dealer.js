@@ -6,8 +6,7 @@ import '../App.css';
 function Dealer() {
     const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
-    const reduxDeckId = useSelector(state => state.deckId?.deckId);
-    console.log('reduxDeckId', reduxDeckId);
+    // const reduxDeckId = useSelector(state => state.deckId?.deckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
@@ -25,9 +24,6 @@ function Dealer() {
             const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
             setCardsRemaining(data.remaining);
-            // if (cardsRemaining < 10) {
-            //     shuffleDeck();
-            // }
             // console.log('dealerData', data);
             dealer_cards.push(data?.cards[0]);
             setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
@@ -42,14 +38,8 @@ function Dealer() {
                 let dealer_cards = [];
                 const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
                 const data = await response.json();
-                // console.log('data', data.remaining);
                 setCardsRemaining(data.remaining);
-                // if (cardsRemaining <= 10) {
-                //     console.log('data is zero');
-                //     shuffleDeck();
-                // };
                 dealer_cards.push(data.cards[0]);
-                // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
                 setDealerNumCards(dealerNumCards + 1);
             };
@@ -60,23 +50,15 @@ function Dealer() {
     //DEALER AI---------------------------------------------------------
     useEffect(() => {
         if ((gameTurn) && (dealerScore < 17)) {
-            // console.log('dealer has less than 21-------------------');
             const addDealerCards = async () => {
                 let dealer_cards = [];
                 const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
                 const data = await response.json();
-                // console.log('data', data.remaining);
                 setCardsRemaining(data.remaining);
-                // if (cardsRemaining <= 10) {
-                //     console.log('data is zero');
-                //     shuffleDeck();
-                // };
                 dealer_cards.push(data.cards[0]);
-                // dealer_cards.push(data.cards[1]);
                 setDealerCards((dealerCards) => [...dealerCards, dealer_cards]);
                 setDealerNumCards(dealerNumCards + 1);
             };
-            // console.log('dealerScore in effect', dealerScore);
             addDealerCards();
         }
     }, [dealerNumCards]);
@@ -85,15 +67,12 @@ function Dealer() {
     useEffect(() => {
         dealerCards.forEach(ele => {
             if (parseInt(ele[0]?.value)) {
-                // console.log('number', dealerScore)
                 setDealerScore(dealerScore + parseInt(ele[0]?.value));
             } else if (royals.includes(ele[0]?.value)) {
-                // console.log('royals');
                 setDealerScore(dealerScore + 10);
             } else if (ele[0]?.value === "ACE") {
                 setDealerScore(dealerScore + 1);
                 if ((dealerScore + 10) <= 21) {
-                    // console.log('is alright');
                     setDealerScore(dealerScore + 11);
                 }
             };
@@ -102,20 +81,17 @@ function Dealer() {
 
     //DISPATCH DEALER SCORE--------------------------------------------------
     useEffect(() => {
-            // console.log('dealerScore', dealerScore);
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))
     }, [dealerScore]);
 
-       //CHECK SCORE AND DETERMINE OUTCOME--------------------
-       useEffect(() => {
+    //CHECK SCORE AND DETERMINE OUTCOME--------------------
+    useEffect(() => {
         function checkScore() {
             if (dealerScore > 21) {
                 setDealerBust("true");
-                // setDealerCards([]);
                 setDealerScore('BUSTED');
                 return (
                     <div className="player__card--image">
-                        <h2>BUSTED</h2>
                         {dealerCards.map((card, index) => {
                             return (
                                 <div key={index}>
@@ -130,22 +106,19 @@ function Dealer() {
     }, [dealerScore]);
 
     useEffect(() => {
-      if (dealerBust === "true") {
-        dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
+        if (dealerBust === "true") {
+            dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}))
         } 
     }, [dealerBust]);
 
     useEffect(() => {
         if ((gameTurn) && (dealerScore >= 17)) {
             if(playerScore > dealerScore) {
-                // console.log('player score greater than');
                 dispatch(gameActions.gameStatus({'gameStatus': 'PLAYER WINS'}));
             } else if (playerScore < dealerScore) {
-                // console.log('player is less than dealer');
                 dispatch(gameActions.gameStatus({'gameStatus': 'DEALER WINS'}));
             } else {
-                // console.log('equal==============');
-                dispatch(gameActions.gameStatus({'gameStatus': '     PUSH'}));
+                dispatch(gameActions.gameStatus({'gameStatus': 'PUSH'}));
             }
         };
     }, [dealerScore]);
