@@ -20,11 +20,11 @@ export default function WelcomePage() {
                     currently no betting taking place but can add 
                     at a later date if desired.
                 </p>
-            <p classname="blackjack__image--example"><img src="./images/Blackjack-demo.gif" alt="blackjack-screen-shot" width="90%"></img></p>
-            </div>
             <NavLink to={{pathname: "/blackjack"}}>
                 <button className="blackjack__button--home">CLICK HERE TO START</button>
             </NavLink>
+            <p classname="blackjack__image--example"><img src="./images/Blackjack-Gameplay.gif" alt="blackjack-screen-shot" width="90%"></img></p>
+            </div>
             <Team />
         </div>
     </>
