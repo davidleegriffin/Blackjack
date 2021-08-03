@@ -1,10 +1,10 @@
 # [BLACKJACK - Vegas Rules](https://blackjack-vegas-dealer.herokuapp.com/)
 
 ## by [David Griffin](https://www.linkedin.com/in/david-griffin-117b0045/)
-# Table of Contents:
-[Installation](https://github.com/davidleegriffin/Blackjack#Installation)
-[Navigation](https://github.com/davidleegriffin/Blackjack#Navigation)
-[Description](https://github.com/davidleegriffin/Blackjack#Description)
+# [Table of Contents]:
+- [Installation](https://github.com/davidleegriffin/Blackjack#Installation)
+- [Navigation](https://github.com/davidleegriffin/Blackjack#Navigation)
+- [Description](https://github.com/davidleegriffin/Blackjack#Description)
 
 
 
