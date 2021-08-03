@@ -1,6 +1,6 @@
-# BLACKJACK - Vegas Rules
+# [BLACKJACK - Vegas Rules](https://blackjack-vegas-dealer.herokuapp.com/)
 
-## by David Griffin
+## by [David Griffin](https://www.linkedin.com/in/david-griffin-117b0045/)
 
 Clone the repo
 ```
@@ -19,4 +19,4 @@ npm start
 ```
 
 
-![navigation example](./public/images/Blackjack-demo.gif)
+![Navigation Example](./public/images/Blackjack-demo.gif)
