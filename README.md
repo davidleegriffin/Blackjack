@@ -29,7 +29,7 @@ npm start
 
 # [Navigation](https://github.com/davidleegriffin/Blackjack#Navigation)
 
-![Navigation Example](./public/images/Blackjack-demo.gif)
+![Navigation Example](./public/images/Blackjack-Gameplay.gif)
 
 # [Description](https://github.com/davidleegriffin/Blackjack#Description)
 
