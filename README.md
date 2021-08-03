@@ -45,3 +45,4 @@ Basic rules of blackjack with dealer standing on 17 or above. Shuffle Deck anyti
 - Add Split if Cards are equal value
 - Add Double Down to Betting
 - Add Insurance to Betting
+- Setup Auto-Player and log results in a Graph
