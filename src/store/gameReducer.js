@@ -26,7 +26,7 @@ const gameReducer = (state = {}, action) => {
             newState = {...state, 'gameStatus': action.game_status};
             return newState;
         case CARDS_REMAINING:
-            newState = {'cardsRemaining': action.cards_remaining};
+            newState = {...state, 'cardsRemaining': action.cards_remaining};
             return newState;
         default:
             return state;

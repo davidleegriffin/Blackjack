@@ -4,17 +4,6 @@
   background-color: rgba(75, 145, 75, 0.75);
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
 .App-header {
   background-color: #282c34;
   min-height: 7vh;
@@ -95,10 +84,11 @@
   align-self: center;
   text-align: center;
   padding: 7px;
-  /* color: black; */
-  /* -webkit-text-fill-color: white; 
-  -webkit-text-stroke-width: .5px;
-  -webkit-text-stroke-color: black; */
+  animation: pulse .25s ease-in;
+}
+
+.dealer__header--remaining {
+  display: none;
 }
 
 .dealer__header--gameStatus {
@@ -110,6 +100,5 @@
 
 .dealer__container--remaining {
   margin-right: 50px;
-  /* margin-left: 50px; */
   margin-top: -50px;
 }

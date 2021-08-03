@@ -38,7 +38,7 @@ function Player(props) {
     useEffect(() => {
         const dealPlayerCards = async () => {
             let player_cards = [];
-            const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`);
+            const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`);
             const data = await response.json();
             console.log('playerData', data);
             // console.log('playerDeckId', deckId);
@@ -46,7 +46,7 @@ function Player(props) {
             // console.log(deckId === reduxDeckId);
             console.log('playerCards', playerCards);
             player_cards.push(data?.cards[0]);
-            player_cards.push(data?.cards[1]);
+            // player_cards.push(data?.cards[1]);
             // console.log('player_cards', player_cards);
             setPlayerCards((playerCards) => [...playerCards, player_cards])
         };
@@ -113,13 +113,19 @@ function Player(props) {
         const data = await response.json();
         player_cards.push(data.cards[0]);
         setPlayerCards((playerCards) => [...playerCards, player_cards])
+    };
+
+    console.log('++playerCards++', playerCards.length);
+    if(playerCards.length < 2) {
+        console.log('less than 2 cards', playerCards);
+        // hitPlayer();
     }
 
 
     return (
         <div>
             <h1>Player Score: {playerScore}</h1>
-            <button className="player__button--hitMe" disabled={`${hitButton}`} onClick={hitPlayer}>HIT ME!</button>
+            <button className="player__button--hitMe" disabled={`${hitButton}`} onClick={() => {hitPlayer()}}>HIT ME!</button>
             <div>
                 <div className="player__card--image">
                     {playerCards.map((card, index) => {

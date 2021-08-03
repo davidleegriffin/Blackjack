@@ -7,8 +7,6 @@ import Footer from './components/Footer';
 
 function App() {
 
-  // localStorage.setItem("test2", "testing2");
-
   return (
     <div className="App">
       <header className="App-header">

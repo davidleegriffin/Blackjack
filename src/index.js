@@ -13,7 +13,6 @@ function Root() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {/* <App /> */}
         <Switch>
           <Route exact path="/" component={WelcomePage} />
           <Route exact path="/blackjack" component={App} />

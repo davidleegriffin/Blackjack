@@ -7,29 +7,16 @@ function Dealer() {
     const dispatch = useDispatch();
     const deckId = localStorage.getItem("deck");
     const reduxDeckId = useSelector(state => state.deckId?.deckId);
-    // console.log('reduxDeckId', reduxDeckId);
-    // const standButton = localStorage.getItem("standButton");
+    console.log('reduxDeckId', reduxDeckId);
     const royals = ["KING", "QUEEN", "JACK", "10"];
     const [dealerCards, setDealerCards] = useState([]);
     const [dealerScore, setDealerScore] = useState(0);
-    const [cardsRemaining, setCardsRemaining] = useState();
     const [dealerBust, setDealerBust] = useState(false);
     const [dealerNumCards, setDealerNumCards] = useState(1);
+    const [cardsRemaining, setCardsRemaining] = useState();
     let playerScore = useSelector(state => state.playerScore?.playerScore);
     let gameTurn = useSelector(state => state.gameTurn);
     let gameStatus = useSelector(state => state.gameStatus?.gameStatus);
-    // console.log('reduxPlayerScore', playerScore);
-    if (gameStatus) {
-    // console.log('++++++++++++++++++++++++++++reduxGameStatus', gameStatus);
-    };
-
-    //SHUFFLE THE CURRENT DECK---------------------------------------------------------
-    function shuffleDeck() {
-        fetch('https://deckofcardsapi.com/api/deck/`${deckId}`/shuffle/?deck_count=4')
-        .then(response => response.json())
-        .then(data => setCardsRemaining(data.remaining))
-        .catch((err) => console.error(err));
-    };
 
     //DEAL INITIAL DEALER CARD--------------------------------------------------------------------------
     useEffect(() => {
@@ -172,7 +159,7 @@ function Dealer() {
                                         { gameStatus }
                                     </h1>
                                 </div>}
-                <h3>
+                <h3 className="dealer__header--remaining">
                     <h1>{ cardsRemaining }</h1>
                     Cards Remaining in Deck
                 </h3>

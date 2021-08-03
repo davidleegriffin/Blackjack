@@ -26,10 +26,6 @@ p > img {
 }
 
 .blackjack__explainer {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* align-self: center; */
     color: black;
     text-shadow: 0px 0px 5px white;
     margin-top: 3%;
