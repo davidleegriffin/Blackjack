@@ -2,6 +2,9 @@
   text-align: center;
   height: 100vmax;
   background-color: rgba(75, 145, 75, 0.75);
+  background-image: url("https://images.unsplash.com/photo-1517232115160-ff93364542dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fHBva2VyJTIwdGFibGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-header {
@@ -26,6 +29,18 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.dealer__container--main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  height: 450px;
+  background-color: rgba(34, 117, 34, 0.75);
+  border-radius: 25px;
+  border: 2px solid white;
 }
 
 .player__button--hitMe:hover {
@@ -78,11 +93,19 @@
 
 .dealer__container--gameStatus {
   display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 90%;
+  height: 7.5%;
   background-color: red;
-  border: 7px solid gold;
+  border: 7px solid rgb(255, 255, 255);
   outline: 3px solid black;
   align-self: center;
   text-align: center;
+  font-size: 46px;
+  font-weight: bold;
   padding: 7px;
   animation: pulse .25s ease-in;
 }
@@ -94,6 +117,7 @@
 .dealer__header--gameStatus {
   text-align: center;
   align-self: center;
+  align-content: center;
   color: black;
   text-shadow: 1.5px 1.5px 3px #fff;
 }
@@ -101,4 +125,8 @@
 .dealer__container--remaining {
   margin-right: 50px;
   margin-top: -50px;
+}
+
+.dealer__container--cards {
+  /* background-color: rgba(34, 117, 34, 0.75); */
 }

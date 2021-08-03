@@ -155,16 +155,16 @@ function Dealer() {
         <div className="dealer__container--main">
             <div className="dealer__container--remaining">
                 {gameStatus && <div className="dealer__container--gameStatus">
-                                    <h1 className="dealer__header--gameStatus">
-                                        { gameStatus }
-                                    </h1>
+                                    <div className="dealer__header--gameStatus">
+                                        <span>{ gameStatus }</span>
+                                    </div>
                                 </div>}
                 <h3 className="dealer__header--remaining">
                     <h1>{ cardsRemaining }</h1>
                     Cards Remaining in Deck
                 </h3>
             </div>
-            <div>
+            <div className="dealer__container--cards">
                 <h1>Dealer Score: { dealerScore }</h1>
                 <div className="dealer__card--image">
                     {dealerCards.map((card, idx) => {

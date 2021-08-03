@@ -18,6 +18,7 @@ button {
   height: 50px;
   width: 150px;
   border-radius: 7.5px;
+  border: 1px solid white;
   box-shadow: 2px 2px 4px 1px black;
   font-family: 'Roboto';
   font-size: 1.75ch;
