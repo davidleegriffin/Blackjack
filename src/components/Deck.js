@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import * as gameActions from '../store/gameActions';
 
 function Deck() {
-
     const [cardsRemaining, setCardsRemaining] = useState();
     const [standButton, setStandButton] = useState("");
     const dispatch = useDispatch();
@@ -13,7 +12,7 @@ function Deck() {
         const initialDeck = async () => {
             const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
             const data = await response.json();
-            console.log('initialDeckData', data);
+            // console.log('initialDeckData', data);
             await setCardsRemaining(data.remaining);
             await localStorage.setItem("deck", data?.deck_id);
             dispatch(gameActions.deckId({'deckId': data.deck_id}));
@@ -35,9 +34,9 @@ function Deck() {
     function newHand() {
         setStandButton("");
         setTimeout(function() { window.location.reload(); }, 500);
-        // window.location.reload();
     };
     
+    //DISPATCH GAME STAUS------------------------------
     useEffect(() => {
         dispatch(gameActions.gameStatus({'gameStatus': ''}));
     }, [standButton]);
@@ -48,12 +47,12 @@ function Deck() {
         await dispatch(gameActions.gameTurn(true))
     };
 
+    //RETURN----------------------------------------
     return (
         <div className="deck__container--main">
             <button disabled={`${standButton}`} onClick={standPlayer}>PLAYER STAND</button>
             <button className="deck__button--newHand" onClick ={newHand}>NEW HAND</button>
             <button onClick={() => {shuffleDeck()}}>SHUFFLE DECK</button>
-
         </div>
     )
 }
