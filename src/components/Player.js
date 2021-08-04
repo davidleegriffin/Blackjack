@@ -46,16 +46,30 @@ function Player(props) {
     //TALLY PLAYER SCORE-------------------------
     useEffect(() => {
         playerCards.forEach(ele => {
+            let aceCount = 0;
+            let player_score = playerScore;
             if (parseInt(ele[0]?.value)) {
-                setPlayerScore(playerScore + parseInt(ele[0]?.value));
+                // setPlayerScore(playerScore + parseInt(ele[0]?.value));
+                player_score =  player_score + parseInt(ele[0]?.value);
             } else if (royals.includes(ele[0]?.value)) {
-                setPlayerScore(playerScore + 10);
+                // setPlayerScore(playerScore + 10);/
+                player_score = player_score + 10;
             } else if (ele[0]?.value === "ACE") {
-                setPlayerScore(playerScore + 1);
-                if ((playerScore + 10) <= 21) {
-                    setPlayerScore(playerScore + 11);
-                }
-            }
+                aceCount++;
+                player_score = player_score + 11;
+                // setPlayerScore(playerScore + 11);
+                // setPlayerScore(playerScore + 1);
+                // if ((playerScore + 10) <= 21) {
+                // }
+            };
+            while ((aceCount > 0) && (player_score > 21)) {
+                console.log('ace is the place');
+                // setPlayerScore(playerScore - 10);
+                player_score = player_score - 10;
+            };
+            console.log('player_score', player_score);
+            console.log('aceCount', aceCount);
+            setPlayerScore(player_score);
         });
     }, [playerCards]);
 
@@ -72,7 +86,7 @@ function Player(props) {
                 setHitButton("true");
                 setPlayerScore('BUSTED');
                 return (
-                    <div className="player__card--image">                  
+                    <div className="player__card--image">
                     {playerCards.map((card, index) => {
                         return (
                             <div key={index}>
@@ -85,7 +99,7 @@ function Player(props) {
         };
         checkScore();
     }, [playerScore]);
-    
+
     //ADD PLAYER CARD(S)---------------------------
     async function hitPlayer() {
         setPlayerNumCards(playerNumCards + 1);
@@ -109,7 +123,7 @@ function Player(props) {
                                 <div key={index} className="player__card--image">
                                     <img src={card[0]?.image} width="100" />
                                 </div>
-                                );})}
+                            );})}
                     </div>
                 </div>
             </div>
