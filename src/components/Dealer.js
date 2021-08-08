@@ -79,6 +79,11 @@ function Dealer() {
         });
     }, [dealerCards]);
 
+     //DISPATCH DEALER HAND------------------------------------------
+     useEffect(() => {
+        dispatch(gameActions.dealerHand({'dealerHand': dealerCards}))
+    }, [dealerCards]);
+
     //DISPATCH DEALER SCORE--------------------------------------------------
     useEffect(() => {
             dispatch(gameActions.dealerScore({'dealerScore': dealerScore}))

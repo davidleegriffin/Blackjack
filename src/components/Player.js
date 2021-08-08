@@ -73,9 +73,14 @@ function Player(props) {
         });
     }, [playerCards]);
 
+    //DISPATCH PLAYER HAND------------------------------------------
+    useEffect(() => {
+        dispatch(gameActions.playerHand({'playerHand': playerCards}))
+    }, [playerCards]);
+
     //DISPATCH PLAYER SCORE--------------------------------------------------
     useEffect(() => {
-    dispatch(gameActions.playerScore({'playerScore': playerScore}))
+    dispatch(gameActions.playerScore({'playerScore': playerScore}));
 }, [playerScore]);
 
     //CHECK SCORE AND DETERMINE OUTCOME--------------------
